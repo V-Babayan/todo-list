@@ -40,7 +40,16 @@ export const GlobalStyles = createGlobalStyle`
   }
 `;
 
-
-const theme = {}
+const theme = {
+  priorityColors: {
+    high: "#de1f26",
+    medium: "#de771f",
+    low: "#27de1f",
+  },
+  primary: {
+    violet: "#1f27de",
+    green: "#27de1f",
+  },
+};
 
 export default theme;
