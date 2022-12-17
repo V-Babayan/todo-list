@@ -1,10 +1,6 @@
-import React from "react";
-import ReactDOM from "react-dom/client";
-import { createGlobalStyle, ThemeProvider } from "styled-components";
+import { createGlobalStyle } from "styled-components";
 
-import App from "./App";
-
-const Global = createGlobalStyle`
+export const GlobalStyles = createGlobalStyle`
   *,
   *::after,
   *::before {
@@ -15,7 +11,6 @@ const Global = createGlobalStyle`
     box-sizing: border-box;
     -webkit-font-smoothing: antialiased;
   }
-
   h1,
   h2,
   h3,
@@ -25,28 +20,23 @@ const Global = createGlobalStyle`
     font-size: inherit;
     font-weight: inherit;
   }
-
   ul,
   ol,
   li {
     list-style: none;
   }
-
   a {
     text-decoration: none;
     color: inherit;
   }
-
   q::after,
   q::before {
     content: '';
   }
-
   body,
   html {
     font-family: 'Rubik', sans-serif;
     background: #f5f5f5;
-
     width: 100%;
     height: 100vh
   }
@@ -64,10 +54,4 @@ const theme = {
   },
 };
 
-const root = ReactDOM.createRoot(document.getElementById("root"));
-root.render(
-  <ThemeProvider theme={theme}>
-    <Global />
-    <App />
-  </ThemeProvider>
-);
+export default theme;

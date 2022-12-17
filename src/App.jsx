@@ -1,10 +1,10 @@
-import React, { useState } from "react";
-import styled from "styled-components";
+import React, { memo, useState } from 'react';
+import styled from 'styled-components';
 
-import Modal from "./components/Modal";
-import TodoList from "./components/TodoList";
-import MyButton from "./components/UI/MyButton";
-import ModalForm from "./components/ModalForm";
+import Modal from './components/Modal';
+import TodoList from './components/TodoList';
+import MyButton from './components/UI/MyButton';
+import ModalForm from './components/ModalForm';
 
 const StyledApp = styled.div`
   max-width: 1000px;
@@ -18,38 +18,38 @@ function App() {
   const [todos, setTodos] = useState([
     {
       id: 1,
-      title: "Todos project is completed again over of dead line",
+      title: 'Todos project is completed again over of dead line',
       description: "Create react app 'Todos list'.",
       created: new Date().toLocaleDateString(),
       expected: new Date().toLocaleDateString(),
-      priority: "low",
+      priority: 'low',
       isActive: true,
     },
     {
       id: 2,
-      title: "Calculator",
+      title: 'Calculator',
       description: "Create react app 'Calculator'.",
       created: new Date().toLocaleDateString(),
       expected: new Date().toLocaleDateString(),
-      priority: "high",
+      priority: 'high',
       isActive: false,
     },
     {
       id: 3,
-      title: "Physics",
-      description: "Run 5kms.",
+      title: 'Physics',
+      description: 'Run 5kms.',
       created: new Date().toLocaleDateString(),
       expected: new Date().toLocaleDateString(),
-      priority: "medium",
+      priority: 'medium',
       isActive: true,
     },
     {
       id: 4,
-      title: "Practics",
-      description: "Practics react styled-components.",
+      title: 'Practics',
+      description: 'Practics react styled-components.',
       created: new Date().toLocaleDateString(),
       expected: new Date().toLocaleDateString(),
-      priority: "low",
+      priority: 'low',
       isActive: false,
     },
   ]);
@@ -96,10 +96,15 @@ function App() {
         onClick={() => {
           changingTodoItem = {};
           setIsModalActive(true);
-        }}>
+        }}
+      >
         Create Todo
       </MyButton>
-      <TodoList todos={todos} change={changeTodoModal} changeIsActive={changeIsActive} />
+      <TodoList
+        todos={todos}
+        change={changeTodoModal}
+        changeIsActive={changeIsActive}
+      />
       <Modal active={isModalActive} setActive={setIsModalActive}>
         <ModalForm
           item={changingTodoItem}
@@ -112,4 +117,4 @@ function App() {
   );
 }
 
-export default App;
+export default memo(App);
