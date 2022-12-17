@@ -1,7 +1,6 @@
-import React from "react";
 import styled from "styled-components";
 
-const StyledModal = styled.div`
+export const StyledModal = styled.div`
   height: 100vh;
   width: 100vw;
   position: fixed;
@@ -18,7 +17,7 @@ const StyledModal = styled.div`
   opacity: ${({ active }) => (active ? 1 : 0)};
 `;
 
-const StyledModalContent = styled.div`
+export const StyledModalContent = styled.div`
   padding: 20px;
   border-radius: 12px;
   width: 50vw;
@@ -28,16 +27,3 @@ const StyledModalContent = styled.div`
 
   background: #ffffff;
 `;
-
-const Modal = ({ active, setActive, children }) => {
-  return (
-    <StyledModal active={active} onClick={() => setActive(false)}>
-      <StyledModalContent active={active} onClick={(e) => e.stopPropagation()}>
-        {children}
-      </StyledModalContent>
-    </StyledModal>
-    
-  );
-};
-
-export default Modal;
