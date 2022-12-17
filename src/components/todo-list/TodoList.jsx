@@ -1,7 +1,7 @@
-import React, { memo } from 'react';
+import React from "react";
 
-import TodoItem from '../TodoItem';
-import { StyledTitle } from './TodoList.styled';
+import { StyledTitle } from "./TodoList.styled";
+import TodoItem from "../todo-item/TodoItem";
 
 const TodoList = ({ todos, changeIsActive, change }) => {
   if (!todos.length) {
@@ -10,11 +10,11 @@ const TodoList = ({ todos, changeIsActive, change }) => {
 
   return (
     <ul>
-      {todos.map((todo, index) => (
+      {todos.map((elem, index) => (
         <TodoItem
-          key={todo.id}
           changeIsActive={changeIsActive}
-          item={todo}
+          item={elem}
+          key={elem.id}
           index={index}
           change={change}
         />
@@ -23,4 +23,4 @@ const TodoList = ({ todos, changeIsActive, change }) => {
   );
 };
 
-export default memo(TodoList);
+export default TodoList;

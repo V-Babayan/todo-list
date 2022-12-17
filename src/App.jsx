@@ -2,7 +2,7 @@ import React, { memo, useState } from "react";
 import styled from "styled-components";
 
 import Modal from "./components/Modal";
-import TodoList from "./components/TodoList";
+import TodoList from "./components/todo-list/TodoList";
 import MyButton from "./components/core-ui/button/Button";
 import ModalForm from "./components/ModalForm";
 
