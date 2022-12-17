@@ -1,7 +1,6 @@
-import React from "react";
 import styled from "styled-components";
 
-const StyledMyInput = styled.input`
+const StyledInput = styled.input`
   padding: 7px 15px;
   width: 100%;
 
@@ -10,8 +9,4 @@ const StyledMyInput = styled.input`
   font-size: 1.4em;
 `;
 
-const MyInput = (props) => {
-  return <StyledMyInput {...props} />;
-};
-
-export default MyInput;
+export default StyledInput;

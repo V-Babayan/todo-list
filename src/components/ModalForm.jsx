@@ -1,9 +1,9 @@
-import React, { useCallback, useMemo, useState } from 'react';
-import styled from 'styled-components';
+import React, { useCallback, useMemo, useState } from "react";
+import styled from "styled-components";
 
-import MyInput from './UI/MyInput';
-import MyButton from './UI/MyButton';
-import FormPrioritySelect from './FormPrioritySelect';
+import MyInput from "./core-ui/input/Input";
+import MyButton from "./core-ui/button/Button";
+import FormPrioritySelect from "./FormPrioritySelect";
 
 const StyledForm = styled.form`
   display: flex;
@@ -54,17 +54,15 @@ const ModalForm = ({ item = {}, create, change, remove }) => {
       <div>
         <StyledTitle>Title</StyledTitle>
         <MyInput
-          value={newTodo.title || ''}
+          value={newTodo.title || ""}
           onChange={(e) => setNewTodo({ ...newTodo, title: e.target.value })}
         />
       </div>
       <div>
         <StyledTitle>Description</StyledTitle>
         <MyInput
-          value={newTodo.description || ''}
-          onChange={(e) =>
-            setNewTodo({ ...newTodo, description: e.target.value })
-          }
+          value={newTodo.description || ""}
+          onChange={(e) => setNewTodo({ ...newTodo, description: e.target.value })}
         />
       </div>
 
@@ -73,19 +71,19 @@ const ModalForm = ({ item = {}, create, change, remove }) => {
         <StyledInputsContainer>
           <FormPrioritySelect
             priority={newTodo.priority}
-            id='high'
+            id="high"
             changePriority={changePriority}
           />
 
           <FormPrioritySelect
             priority={newTodo.priority}
-            id='medium'
+            id="medium"
             changePriority={changePriority}
           />
 
           <FormPrioritySelect
             priority={newTodo.priority}
-            id='low'
+            id="low"
             changePriority={changePriority}
           />
         </StyledInputsContainer>
@@ -97,8 +95,7 @@ const ModalForm = ({ item = {}, create, change, remove }) => {
             onClick={(e) => {
               e.preventDefault();
               create(newTodo);
-            }}
-          >
+            }}>
             Create
           </MyButton>
         ) : (
@@ -107,16 +104,14 @@ const ModalForm = ({ item = {}, create, change, remove }) => {
               onClick={(e) => {
                 e.preventDefault();
                 change(newTodo);
-              }}
-            >
+              }}>
               Change
             </MyButton>
             <MyButton
               onClick={(e) => {
                 e.preventDefault();
                 remove();
-              }}
-            >
+              }}>
               Remove
             </MyButton>
           </>

@@ -2,8 +2,8 @@ import React from "react";
 import styled from "styled-components";
 
 import TodoInfo from "./TodoInfo";
-import MyChackbox from "./UI/MyCheckbox";
-import MyButton from "./UI/MyButton";
+import MyChackbox from "./core-ui/checkbox/Checkbox";
+import MyButton from "./core-ui/button/Button";
 
 const StyledTodoItem = styled.li`
   padding: 10px;

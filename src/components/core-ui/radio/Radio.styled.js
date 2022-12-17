@@ -1,7 +1,6 @@
-import React from "react";
 import styled from "styled-components";
 
-const StyledMyRadio = styled.input.attrs({ type: "radio" })`
+const StyledRadio = styled.input.attrs({ type: "radio" })`
   appearance: none;
   display: inline-block;
   height: 20px;
@@ -16,8 +15,4 @@ const StyledMyRadio = styled.input.attrs({ type: "radio" })`
   }
 `;
 
-const MyRadio = (props) => {
-  return <StyledMyRadio {...props} />;
-};
-
-export default MyRadio;
+export default StyledRadio;

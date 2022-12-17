@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import MyRadio from "./UI/MyRadio";
+import MyRadio from "./core-ui/radio/Radio";
 
 const StyledPriorityRadio = styled.div`
   display: flex;

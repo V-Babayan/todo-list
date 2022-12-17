@@ -1,7 +1,6 @@
-import React from "react";
 import styled from "styled-components";
 
-const StyledMyButton = styled.button`
+const StyledButton = styled.button`
   display: inline-block;
   padding: 5px 10px;
 
@@ -16,12 +15,4 @@ const StyledMyButton = styled.button`
   }
 `;
 
-const MyButton = (props) => {
-  return (
-    <>
-      <StyledMyButton {...props} />
-    </>
-  );
-};
-
-export default MyButton;
+export default StyledButton;
