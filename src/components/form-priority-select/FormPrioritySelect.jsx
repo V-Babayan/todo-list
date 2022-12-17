@@ -1,16 +1,7 @@
 import React from "react";
-import styled from "styled-components";
-import MyRadio from "./core-ui/radio/Radio";
 
-const StyledPriorityRadio = styled.div`
-  display: flex;
-  align-items: center;
-  gap: 4px;
-`;
-const StyledLabel = styled.label`
-  text-transform: capitalize;
-  color: ${({ htmlFor, theme }) => theme.priorityColors[htmlFor] || theme.primary.violet};
-`;
+import { StyledPriorityRadio, StyledLabel } from "./FormPrioritySelect.styled";
+import MyRadio from "../core-ui/radio/Radio";
 
 const FormPrioritySelect = ({ priority, id, changePriority }) => {
   return (
