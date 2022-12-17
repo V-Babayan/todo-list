@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-const StyledChackbox = styled.div`
+const StyledCheckbox = styled.div`
   position: relative;
   height: 20px;
   flex: 0 0 20px;
@@ -26,4 +26,4 @@ const StyledIcon = styled.svg`
   stroke: #000000;
 `;
 
-export { StyledChackbox, StyledIcon };
+export { StyledCheckbox, StyledIcon };
