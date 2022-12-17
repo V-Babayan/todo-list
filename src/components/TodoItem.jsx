@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-import TodoInfo from "./TodoInfo";
+import TodoInfo from "./todo-info/TodoInfo";
 import MyChackbox from "./core-ui/checkbox/Checkbox";
 import MyButton from "./core-ui/button/Button";
 
