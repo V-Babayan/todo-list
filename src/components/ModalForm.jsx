@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 
 import MyInput from "./UI/MyInput";
@@ -44,7 +44,7 @@ const ModalForm = ({ item = {}, create, change, remove }) => {
     setNewTodo({ ...newTodo, priority });
   };
 
-  const isCreate = useMemo(() => Object.keys(item).length === 0, []);
+  const isCreate = Object.keys(item).length === 0;
 
   return (
     <StyledForm>
