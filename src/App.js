@@ -4,6 +4,7 @@ import styled from "styled-components";
 import Modal from "./components/Modal";
 import TodoList from "./components/TodoList";
 import MyButton from "./components/UI/MyButton";
+import ModalForm from "./components/ModalForm";
 
 const StyledApp = styled.div`
   max-width: 1000px;
@@ -99,14 +100,14 @@ function App() {
         Create Todo
       </MyButton>
       <TodoList todos={todos} change={changeTodoModal} changeIsActive={changeIsActive} />
-      <Modal
-        isModalActive={isModalActive}
-        setModalActive={setIsModalActive}
-        item={changingTodoItem}
-        create={createItem}
-        change={changingTodo}
-        remove={removeTodo}
-      />
+      <Modal active={isModalActive} setActive={setIsModalActive}>
+        <ModalForm
+          item={changingTodoItem}
+          create={createItem}
+          change={changingTodo}
+          remove={removeTodo}
+        />
+      </Modal>
     </StyledApp>
   );
 }
