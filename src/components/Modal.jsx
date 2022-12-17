@@ -36,6 +36,7 @@ const Modal = ({ active, setActive, children }) => {
         {children}
       </StyledModalContent>
     </StyledModal>
+    
   );
 };
 
