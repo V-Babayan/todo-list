@@ -1,13 +1,7 @@
-import React from 'react';
-import styled from 'styled-components';
+import React, { memo } from 'react';
 
-import TodoItem from './TodoItem';
-
-const StyledTitle = styled.h1`
-  text-align: center;
-  font-size: 2em;
-  font-weight: 700;
-`;
+import TodoItem from '../TodoItem';
+import { StyledTitle } from './TodoList.styled';
 
 const TodoList = ({ todos, changeIsActive, change }) => {
   if (!todos.length) {
@@ -16,11 +10,11 @@ const TodoList = ({ todos, changeIsActive, change }) => {
 
   return (
     <ul>
-      {todos.map((elem, index) => (
+      {todos.map((todo, index) => (
         <TodoItem
+          key={todo.id}
           changeIsActive={changeIsActive}
-          item={elem}
-          key={elem.id}
+          item={todo}
           index={index}
           change={change}
         />
@@ -29,4 +23,4 @@ const TodoList = ({ todos, changeIsActive, change }) => {
   );
 };
 
-export default TodoList;
+export default memo(TodoList);
