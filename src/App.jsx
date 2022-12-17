@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 import Modal from "./components/modal/Modal";
 import TodoList from "./components/todo-list/TodoList";
-import MyButton from "./components/core-ui/button/Button";
+import Button from "./components/core-ui/button/Button";
 import ModalForm from "./components/modal-form/ModalForm";
 
 const StyledApp = styled.div`
@@ -92,13 +92,13 @@ function App() {
 
   return (
     <StyledApp>
-      <MyButton
+      <Button
         onClick={() => {
           changingTodoItem = {};
           setIsModalActive(true);
         }}>
         Create Todo
-      </MyButton>
+      </Button>
       <TodoList todos={todos} change={changeTodoModal} changeIsActive={changeIsActive} />
       <Modal active={isModalActive} setActive={setIsModalActive}>
         <ModalForm

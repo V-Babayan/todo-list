@@ -8,8 +8,8 @@ import {
   StyledInputsContainer,
   StyledButtonsContainer,
 } from "./ModalForm.styled";
-import MyInput from "../core-ui/input/Input";
-import MyButton from "../core-ui/button/Button";
+import Input from "../core-ui/input/Input";
+import Button from "../core-ui/button/Button";
 import FormPrioritySelect from "../form-priority-select/FormPrioritySelect";
 
 const ModalForm = ({ item = {}, create, change, remove }) => {
@@ -28,14 +28,14 @@ const ModalForm = ({ item = {}, create, change, remove }) => {
     <StyledForm>
       <div>
         <StyledTitle>Title</StyledTitle>
-        <MyInput
+        <Input
           value={newTodo.title || ""}
           onChange={(e) => setNewTodo({ ...newTodo, title: e.target.value })}
         />
       </div>
       <div>
         <StyledTitle>Description</StyledTitle>
-        <MyInput
+        <Input
           value={newTodo.description || ""}
           onChange={(e) => setNewTodo({ ...newTodo, description: e.target.value })}
         />
@@ -66,29 +66,29 @@ const ModalForm = ({ item = {}, create, change, remove }) => {
 
       <StyledButtonsContainer>
         {isCreate ? (
-          <MyButton
+          <Button
             onClick={(e) => {
               e.preventDefault();
               create(newTodo);
             }}>
             Create
-          </MyButton>
+          </Button>
         ) : (
           <>
-            <MyButton
+            <Button
               onClick={(e) => {
                 e.preventDefault();
                 change(newTodo);
               }}>
               Change
-            </MyButton>
-            <MyButton
+            </Button>
+            <Button
               onClick={(e) => {
                 e.preventDefault();
                 remove();
               }}>
               Remove
-            </MyButton>
+            </Button>
           </>
         )}
       </StyledButtonsContainer>
