@@ -1,7 +1,7 @@
-import React from 'react';
-import styled from 'styled-components';
+import React from "react";
+import styled from "styled-components";
 
-import TodoItem from './TodoItem';
+import TodoItem from "./todo-item/TodoItem";
 
 const StyledTitle = styled.h1`
   text-align: center;
