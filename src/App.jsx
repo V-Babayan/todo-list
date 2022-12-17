@@ -4,7 +4,7 @@ import styled from "styled-components";
 import Modal from "./components/modal/Modal";
 import TodoList from "./components/todo-list/TodoList";
 import MyButton from "./components/core-ui/button/Button";
-import ModalForm from "./components/ModalForm";
+import ModalForm from "./components/modal-form/ModalForm";
 
 const StyledApp = styled.div`
   max-width: 1000px;
