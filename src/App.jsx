@@ -1,4 +1,4 @@
-import React, { memo, useState } from "react";
+import React, { memo, useState, useMemo } from "react";
 import styled from "styled-components";
 
 import Modal from "./components/modal/Modal";
@@ -53,41 +53,41 @@ function App() {
       isActive: false,
     },
   ]);
-  const [isModalActive, setIsModalActive] = useState(false);
+  const [modalActive, setModalActive] = useState(false);
 
-  const changeIsActive = (id, value) => {
+  const changeIsActive = (id) => {
     setTodos(
       todos.map((item) => {
-        if (item.id === id) item.isActive = value;
+        if (item.id === id) item.isActive = !item.isActive;
         return item;
       })
     );
   };
 
   const changeTodoModal = (item) => {
-    setIsModalActive(true);
+    setModalActive(true);
     changingTodoItem = item;
-  };
-
-  const createItem = (item) => {
-    setTodos([...todos, { ...item, id: Date.now(), isActive: true }]);
-    setIsModalActive(false);
   };
 
   const changingTodo = (item) => {
     setTodos(
       todos.map((elem) => {
-        if (elem.id === changingTodoItem.id) return item;
+        if (elem.id === item.id) return item;
         return elem;
       })
     );
-    setIsModalActive(false);
+    setModalActive(false);
     changingTodoItem = {};
+  };
+
+  const createItem = (item) => {
+    setTodos([...todos, { ...item, id: Date.now(), isActive: true }]);
+    setModalActive(false);
   };
 
   const removeTodo = () => {
     setTodos(todos.filter((elem) => elem.id !== changingTodoItem.id));
-    setIsModalActive(false);
+    setModalActive(false);
   };
 
   return (
@@ -95,12 +95,12 @@ function App() {
       <Button
         onClick={() => {
           changingTodoItem = {};
-          setIsModalActive(true);
+          setModalActive(true);
         }}>
         Create Todo
       </Button>
       <TodoList todos={todos} change={changeTodoModal} changeIsActive={changeIsActive} />
-      <Modal active={isModalActive} setActive={setIsModalActive}>
+      <Modal active={modalActive} setActive={setModalActive}>
         <ModalForm
           item={changingTodoItem}
           create={createItem}

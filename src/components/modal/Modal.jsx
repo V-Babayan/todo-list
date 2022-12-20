@@ -6,7 +6,8 @@ const Modal = ({ active, setActive, children }) => {
   return (
     <StyledModal active={active} onClick={() => setActive(false)}>
       <StyledModalContent active={active} onClick={(e) => e.stopPropagation()}>
-        {children}
+        {/* This is temporary decision */}
+        {active && children}
       </StyledModalContent>
     </StyledModal>
   );

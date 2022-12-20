@@ -12,9 +12,9 @@ const TodoList = ({ todos, changeIsActive, change }) => {
     <ul>
       {todos.map((elem, index) => (
         <TodoItem
+          key={elem.id}
           changeIsActive={changeIsActive}
           item={elem}
-          key={elem.id}
           index={index}
           change={change}
         />

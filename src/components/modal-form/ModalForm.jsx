@@ -2,18 +2,18 @@ import React, { useCallback, useMemo, useState } from "react";
 
 import {
   StyledForm,
-  StyledTitle,
   StyledFieldset,
   StyledLegend,
-  StyledInputsContainer,
+  StyledRadioContainer,
   StyledButtonsContainer,
 } from "./ModalForm.styled";
-import Input from "../core-ui/input/Input";
-import Button from "../core-ui/button/Button";
+
 import FormPrioritySelect from "../form-priority-select/FormPrioritySelect";
+import FormInput from "../form-input/FormInput";
+import FormButton from "../FormButton";
 
 const ModalForm = ({ item = {}, create, change, remove }) => {
-  const [newTodo, setNewTodo] = useState(item);
+  const [newTodo, setNewTodo] = useState(() => item);
 
   const changePriority = useCallback(
     (priority) => {
@@ -22,73 +22,53 @@ const ModalForm = ({ item = {}, create, change, remove }) => {
     [newTodo]
   );
 
-  const isCreate = useMemo(() => Object.keys(item).length, [item]);
+  const isCreate = useMemo(() => !Object.keys(item).length, [item]);
 
   return (
     <StyledForm>
-      <div>
-        <StyledTitle>Title</StyledTitle>
-        <Input
-          value={newTodo.title || ""}
-          onChange={(e) => setNewTodo({ ...newTodo, title: e.target.value })}
-        />
-      </div>
-      <div>
-        <StyledTitle>Description</StyledTitle>
-        <Input
-          value={newTodo.description || ""}
-          onChange={(e) => setNewTodo({ ...newTodo, description: e.target.value })}
-        />
-      </div>
+      <FormInput
+        title={"Title"}
+        value={newTodo.title || ""}
+        setValue={(newValue) => setNewTodo({ ...newTodo, title: newValue })}
+      />
+      <FormInput
+        title={"Description"}
+        value={newTodo.description || ""}
+        setValue={(newValue) => setNewTodo({ ...newTodo, description: newValue })}
+      />
 
       <StyledFieldset>
         <StyledLegend>Priority</StyledLegend>
-        <StyledInputsContainer>
+        <StyledRadioContainer>
           <FormPrioritySelect
             priority={newTodo.priority}
-            id="high"
+            id='high'
             changePriority={changePriority}
           />
 
           <FormPrioritySelect
             priority={newTodo.priority}
-            id="medium"
+            id='medium'
             changePriority={changePriority}
           />
 
           <FormPrioritySelect
             priority={newTodo.priority}
-            id="low"
+            id='low'
             changePriority={changePriority}
           />
-        </StyledInputsContainer>
+        </StyledRadioContainer>
       </StyledFieldset>
 
       <StyledButtonsContainer>
         {isCreate ? (
-          <Button
-            onClick={(e) => {
-              e.preventDefault();
-              create(newTodo);
-            }}>
-            Create
-          </Button>
+          <FormButton func={create}>Create</FormButton>
         ) : (
           <>
-            <Button
-              onClick={(e) => {
-                e.preventDefault();
-                change(newTodo);
-              }}>
+            <FormButton item={newTodo} func={change}>
               Change
-            </Button>
-            <Button
-              onClick={(e) => {
-                e.preventDefault();
-                remove();
-              }}>
-              Remove
-            </Button>
+            </FormButton>
+            <FormButton func={remove}>Remove</FormButton>
           </>
         )}
       </StyledButtonsContainer>

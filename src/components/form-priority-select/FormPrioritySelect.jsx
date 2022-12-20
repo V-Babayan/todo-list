@@ -7,7 +7,7 @@ const FormPrioritySelect = ({ priority, id, changePriority }) => {
   return (
     <StyledPriorityRadio>
       <MyRadio
-        name="priority"
+        name='priority'
         id={id}
         defaultChecked={priority === id}
         onClick={() => changePriority(id)}
