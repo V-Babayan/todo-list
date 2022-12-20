@@ -62,7 +62,9 @@ const ModalForm = ({ item = {}, create, change, remove }) => {
 
       <StyledButtonsContainer>
         {isCreate ? (
-          <FormButton func={create}>Create</FormButton>
+          <FormButton item={newTodo} func={create}>
+            Create
+          </FormButton>
         ) : (
           <>
             <FormButton item={newTodo} func={change}>
