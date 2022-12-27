@@ -1,9 +1,12 @@
-import React, { memo, useState } from "react";
+import React, { memo, useState, useMemo } from "react";
 
 import Modal from "./components/modal/Modal";
 import TodoList from "./components/todo-list/TodoList";
 import Button from "./components/core-ui/button/Button";
 import ModalForm from "./components/modal-form/ModalForm";
+import Select from "./components/core-ui/select/Select";
+import Input from "./components/core-ui/input/Input";
+import { useTodos } from "./hooks/useTodos";
 
 let currentTodo;
 
@@ -47,6 +50,11 @@ function App() {
     },
   ]);
   const [modalActive, setModalActive] = useState(false);
+  const [filter, setFilter] = useState({
+    sort: "",
+    query: "",
+  });
+  const sortedAndSearchedTodos = useTodos(filter, todos);
 
   const changeIsActive = (id) => {
     setTodos(
@@ -92,7 +100,29 @@ function App() {
         }}>
         Create Todo
       </Button>
-      <TodoList todos={todos} change={changeTodoModal} changeIsActive={changeIsActive} />
+      <form>
+        <Input
+          value={filter.query}
+          onChange={(e) => setFilter({ ...filter, query: e.target.value })}
+          placeholder={"Search..."}
+        />
+        <Select
+          options={[
+            { value: "title", name: "Title" },
+            { value: "description", name: "Description" },
+            { value: "created", name: "Created date" },
+            { value: "expected", name: "Expected date" },
+          ]}
+          defaultTitle={"Sorting by"}
+          value={filter.sort}
+          setValue={(newSorting) => setFilter({ ...filter, sort: newSorting })}
+        />
+      </form>
+      <TodoList
+        todos={sortedAndSearchedTodos}
+        change={changeTodoModal}
+        changeIsActive={changeIsActive}
+      />
       <Modal active={modalActive} setActive={setModalActive}>
         <ModalForm
           item={currentTodo}
