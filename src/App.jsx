@@ -47,7 +47,6 @@ function App() {
     },
   ]);
   const [modalActive, setModalActive] = useState(false);
-  // const [currentTodo, setCurrentTodo] = useState({});
 
   const changeIsActive = (id) => {
     setTodos(
@@ -59,7 +58,6 @@ function App() {
   };
 
   const changeTodoModal = (item) => {
-    // setCurrentTodo(item);
     currentTodo = item;
     setModalActive(true);
   };
@@ -72,7 +70,6 @@ function App() {
       })
     );
     setModalActive(false);
-    // setCurrentTodo({});
     currentTodo = {};
   };
 
@@ -90,7 +87,6 @@ function App() {
     <div>
       <Button
         onClick={() => {
-          // setCurrentTodo({});
           currentTodo = {};
           setModalActive(true);
         }}>

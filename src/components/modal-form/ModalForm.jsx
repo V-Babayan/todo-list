@@ -6,11 +6,14 @@ import {
   StyledLegend,
   StyledRadioContainer,
   StyledButtonsContainer,
+  StyledDatesContainer,
 } from "./ModalForm.styled";
 
 import FormPriorityRadio from "../form-priority-radio/FormPriorityRadio";
 import FormInput from "../form-input/FormInput";
 import FormButton from "../FormButton";
+import { dateToString, stringToDate } from "../../helpers/dateWorking";
+import FormDate from "../form-date/FormDate";
 
 const ModalForm = ({ item = {}, create, change, remove }) => {
   const [currentTodo, setCurrentTodo] = useState(() => item);
@@ -61,6 +64,23 @@ const ModalForm = ({ item = {}, create, change, remove }) => {
           />
         </StyledRadioContainer>
       </StyledFieldset>
+
+      <StyledDatesContainer style={{ display: "flex" }}>
+        <FormDate
+          title='Created by:'
+          value={currentTodo.created ? dateToString(currentTodo.created) : ""}
+          onChange={(e) =>
+            setCurrentTodo({ ...currentTodo, created: stringToDate(e.target.value) })
+          }
+        />
+        <FormDate
+          title='Expected by:'
+          value={currentTodo.expected ? dateToString(currentTodo.expected) : ""}
+          onChange={(e) =>
+            setCurrentTodo({ ...currentTodo, expected: stringToDate(e.target.value) })
+          }
+        />
+      </StyledDatesContainer>
 
       <StyledButtonsContainer>
         {isCreate ? (

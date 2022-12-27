@@ -26,3 +26,8 @@ export const StyledButtonsContainer = styled.div`
   display: flex;
   justify-content: space-around;
 `;
+
+export const StyledDatesContainer = styled.div`
+  display: flex;
+  justify-content: space-evenly;
+`;
