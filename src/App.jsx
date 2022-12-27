@@ -1,18 +1,11 @@
-import React, { memo, useState, useMemo } from "react";
-import styled from "styled-components";
+import React, { memo, useState } from "react";
 
 import Modal from "./components/modal/Modal";
 import TodoList from "./components/todo-list/TodoList";
 import Button from "./components/core-ui/button/Button";
 import ModalForm from "./components/modal-form/ModalForm";
 
-const StyledApp = styled.div`
-  max-width: 1000px;
-  margin: 0 auto;
-  padding: 10px;
-`;
-
-let changingTodoItem;
+let currentTodo;
 
 function App() {
   const [todos, setTodos] = useState([
@@ -54,6 +47,7 @@ function App() {
     },
   ]);
   const [modalActive, setModalActive] = useState(false);
+  // const [currentTodo, setCurrentTodo] = useState({});
 
   const changeIsActive = (id) => {
     setTodos(
@@ -65,8 +59,9 @@ function App() {
   };
 
   const changeTodoModal = (item) => {
+    // setCurrentTodo(item);
+    currentTodo = item;
     setModalActive(true);
-    changingTodoItem = item;
   };
 
   const changingTodo = (item) => {
@@ -77,7 +72,8 @@ function App() {
       })
     );
     setModalActive(false);
-    changingTodoItem = {};
+    // setCurrentTodo({});
+    currentTodo = {};
   };
 
   const createItem = (item) => {
@@ -86,15 +82,16 @@ function App() {
   };
 
   const removeTodo = () => {
-    setTodos(todos.filter((elem) => elem.id !== changingTodoItem.id));
+    setTodos(todos.filter((elem) => elem.id !== currentTodo.id));
     setModalActive(false);
   };
 
   return (
-    <StyledApp>
+    <div>
       <Button
         onClick={() => {
-          changingTodoItem = {};
+          // setCurrentTodo({});
+          currentTodo = {};
           setModalActive(true);
         }}>
         Create Todo
@@ -102,13 +99,13 @@ function App() {
       <TodoList todos={todos} change={changeTodoModal} changeIsActive={changeIsActive} />
       <Modal active={modalActive} setActive={setModalActive}>
         <ModalForm
-          item={changingTodoItem}
+          item={currentTodo}
           create={createItem}
           change={changingTodo}
           remove={removeTodo}
         />
       </Modal>
-    </StyledApp>
+    </div>
   );
 }
 
