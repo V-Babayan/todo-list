@@ -9,10 +9,13 @@ const StyledRadio = styled.input.attrs({ type: "radio" })`
   padding: 3px;
   cursor: pointer;
   border: 1px solid ${({ id, theme }) => theme.priorityColors[id] || theme.primary.violet};
+
   &:checked {
     background: ${({ id, theme }) => theme.priorityColors[id] || theme.primary.violet};
     background-clip: content-box;
   }
+
+  transition: background 0.3s linear;
 `;
 
 export default StyledRadio;
