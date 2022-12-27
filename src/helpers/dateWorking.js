@@ -9,3 +9,7 @@ export const dateToString = (date) => {
 
   return result;
 };
+
+export const stringToDate = (string) => {
+  return new Date(string);
+};
