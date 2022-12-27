@@ -18,9 +18,9 @@ import FormDate from "../form-date/FormDate";
 const ModalForm = ({ item = {}, create, change, remove }) => {
   const [currentTodo, setCurrentTodo] = useState(() => item);
 
-  useEffect(() => {
-    setCurrentTodo(item);
-  }, [item]);
+  // useEffect(() => {
+  //   setCurrentTodo(item);
+  // }, [item]);
 
   const changePriority = useCallback(
     (priority) => {
