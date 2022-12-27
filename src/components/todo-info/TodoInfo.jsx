@@ -16,8 +16,12 @@ const TodoInfo = ({ item, index }) => {
         <StyledTodoSubtitle isActive={item.isActive}>{item.description}</StyledTodoSubtitle>
       </div>
       <StyledDateContainer>
-        {item.created && <StyledDate content={"Created by: "}>{item.created}</StyledDate>}
-        {item.expected && <StyledDate content={"Expected by: "}>{item.expected}</StyledDate>}
+        {item.created && (
+          <StyledDate content={"Created by: "}>{item.created.toLocaleDateString()}</StyledDate>
+        )}
+        {item.expected && (
+          <StyledDate content={"Expected by: "}>{item.expected.toLocaleDateString()}</StyledDate>
+        )}
       </StyledDateContainer>
     </StyledTodoInfo>
   );
