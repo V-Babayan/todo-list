@@ -40,6 +40,12 @@ export const GlobalStyles = createGlobalStyle`
     width: 100%;
     height: 100vh
   }
+
+  #root {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 10px;
+  }
 `;
 
 const theme = {
