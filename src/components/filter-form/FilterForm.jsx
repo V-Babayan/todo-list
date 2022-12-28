@@ -27,6 +27,7 @@ const FilterForm = ({ filter, setFilter, create }) => {
             { value: "description", name: "Description" },
             { value: "created", name: "Created date" },
             { value: "expected", name: "Expected date" },
+            { value: "priority", name: "Priority" },
           ]}
           defaultTitle={"Sorting by"}
           value={filter.sort}

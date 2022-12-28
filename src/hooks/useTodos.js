@@ -1,4 +1,5 @@
 import { useMemo } from "react";
+import { priorityNumbers } from "../helpers/priorityNumbers";
 
 export const useSortTodos = (sort, todos) => {
   const sortedTodos = useMemo(() => {
@@ -9,6 +10,9 @@ export const useSortTodos = (sort, todos) => {
       case "created":
       case "expected":
         return [...todos].sort((a, b) => Date.parse(a[sort]) - Date.parse(b[sort]));
+
+      case "priority":
+        return [...todos].sort((a, b) => priorityNumbers(b[sort]) - priorityNumbers(a[sort]));
 
       default:
         return todos;
