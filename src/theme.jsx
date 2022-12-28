@@ -45,6 +45,11 @@ export const GlobalStyles = createGlobalStyle`
     max-width: 1000px;
     margin: 0 auto;
     padding: 10px;
+    padding-top: 0;
+  }
+
+  a.active svg{
+    fill: #27de1f;
   }
 `;
 

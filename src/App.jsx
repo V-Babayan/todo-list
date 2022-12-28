@@ -1,18 +1,15 @@
 import React from "react";
-import { Routes, Route, NavLink } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import General from "./pages/General";
 import Archive from "./pages/Archive";
 import Trash from "./pages/Trash";
 import Login from "./pages/Login";
+import Layout from "./components/layout/Layout";
 
 const App = () => {
   return (
     <>
-      <header>
-        <NavLink to={"/general"}>General</NavLink>
-        <NavLink to={"/archive"}>Archive</NavLink>
-        <NavLink to={"/trash"}>Trash</NavLink>
-      </header>
+      <Layout />
       <Routes>
         <Route path='/general' element={<General />} />
         <Route path='/archive' element={<Archive />} />
