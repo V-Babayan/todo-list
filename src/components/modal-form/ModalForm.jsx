@@ -65,7 +65,7 @@ const ModalForm = ({ item = {}, create, change, remove }) => {
         </StyledRadioContainer>
       </StyledFieldset>
 
-      <StyledDatesContainer style={{ display: "flex" }}>
+      <StyledDatesContainer>
         <FormDate
           title='Created by:'
           value={currentTodo.created ? dateToString(currentTodo.created) : ""}

@@ -12,7 +12,7 @@ export const useSortTodos = (sort, todos) => {
         return [...todos].sort((a, b) => Date.parse(a[sort]) - Date.parse(b[sort]));
 
       case "priority":
-        return [...todos].sort((a, b) => priorityNumbers(b[sort]) - priorityNumbers(a[sort]));
+        return [...todos].sort((a, b) => priorityNumbers(a[sort]) - priorityNumbers(b[sort]));
 
       default:
         return todos;
@@ -25,7 +25,7 @@ export const useSortTodos = (sort, todos) => {
 export const useTodos = ({ sort, query }, todos) => {
   const sortedTodos = useSortTodos(sort, todos);
   const sortedAndSearchedTodos = useMemo(() => {
-    return sortedTodos.filter((todo) => todo.title.toLowerCase().includes(query.toLowerCase()));
+    return sortedTodos.filter((todo) => todo.title?.toLowerCase().includes(query.toLowerCase()));
   }, [query, sortedTodos]);
 
   return sortedAndSearchedTodos;
