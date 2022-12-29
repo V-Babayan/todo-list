@@ -48,7 +48,7 @@ export const GlobalStyles = createGlobalStyle`
     padding-top: 0;
   }
 
-  a.active svg{
+  a.active svg {
     fill: #27de1f;
   }
 `;

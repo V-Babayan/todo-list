@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useEffect, useState } from "react";
+import React, { useCallback, useMemo, useState } from "react";
 
 import {
   StyledForm,
@@ -17,10 +17,6 @@ import FormDate from "../form-date/FormDate";
 
 const ModalForm = ({ item = {}, create, change, remove }) => {
   const [currentTodo, setCurrentTodo] = useState(() => item);
-
-  // useEffect(() => {
-  //   setCurrentTodo(item);
-  // }, [item]);
 
   const changePriority = useCallback(
     (priority) => {
