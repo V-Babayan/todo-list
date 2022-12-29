@@ -89,8 +89,7 @@ function General() {
   };
 
   const createItem = () => {
-    if (!currentTodo.id) currentTodo.id = Date.now();
-    setTodos([...todos, { ...currentTodo, isActive: true }]);
+    setTodos([...todos, { ...currentTodo, id: Date.now(), isActive: true }]);
     modalOpenAndClose(false);
   };
 

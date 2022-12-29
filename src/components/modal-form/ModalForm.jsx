@@ -19,7 +19,7 @@ const ModalForm = ({ create, change, remove, currentTodo, setCurrentTodo, isCrea
   const { title, description, priority, created, expected } = currentTodo;
 
   const changeDate = (date, property) => {
-    const res = Object.create(currentTodo);
+    const res = { ...currentTodo };
     res[property] = new Date(date);
 
     setCurrentTodo(res);
