@@ -1,4 +1,4 @@
-import React, { useCallback, useMemo, useState } from "react";
+import React, { useCallback } from "react";
 
 import {
   StyledForm,
@@ -12,17 +12,15 @@ import {
 import FormPriorityRadio from "../form-priority-radio/FormPriorityRadio";
 import FormInput from "../form-input/FormInput";
 import FormButton from "../FormButton";
-import { dateToString, stringToDate } from "../../helpers/dateWorking";
+import { dateToString } from "../../helpers/dateWorking";
 import FormDate from "../form-date/FormDate";
 
-const ModalForm = ({ item = {}, create, change, remove }) => {
-  const [currentTodo, setCurrentTodo] = useState(() => item);
-
-  const { priority, created, expected } = currentTodo;
+const ModalForm = ({ create, change, remove, currentTodo, setCurrentTodo, isCreate }) => {
+  const { title, description, priority, created, expected } = currentTodo;
 
   const changeDate = (date, property) => {
     const res = Object.create(currentTodo);
-    res[property] = stringToDate(date);
+    res[property] = new Date(date);
 
     setCurrentTodo(res);
   };
@@ -34,18 +32,16 @@ const ModalForm = ({ item = {}, create, change, remove }) => {
     [currentTodo]
   );
 
-  const isCreate = useMemo(() => !Object.keys(item).length, [item]);
-
   return (
     <StyledForm>
       <FormInput
         title={"Title"}
-        value={currentTodo.title || ""}
+        value={title}
         setValue={(newValue) => setCurrentTodo({ ...currentTodo, title: newValue })}
       />
       <FormInput
         title={"Description"}
-        value={currentTodo.description || ""}
+        value={description}
         setValue={(newValue) => setCurrentTodo({ ...currentTodo, description: newValue })}
       />
 
@@ -73,14 +69,10 @@ const ModalForm = ({ item = {}, create, change, remove }) => {
 
       <StyledButtonsContainer>
         {isCreate ? (
-          <FormButton item={currentTodo} func={create}>
-            Create
-          </FormButton>
+          <FormButton func={create}>Create</FormButton>
         ) : (
           <>
-            <FormButton item={currentTodo} func={change}>
-              Change
-            </FormButton>
+            <FormButton func={change}>Change</FormButton>
             <FormButton func={remove}>Remove</FormButton>
           </>
         )}

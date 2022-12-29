@@ -2,12 +2,12 @@ import React from "react";
 
 import Button from "./core-ui/button/Button";
 
-const FormButton = ({ func, children, item }) => {
+const FormButton = ({ func, children }) => {
   return (
     <Button
       onClick={(e) => {
         e.preventDefault();
-        func(item);
+        func();
       }}>
       {children}
     </Button>

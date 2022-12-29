@@ -47,10 +47,6 @@ export const GlobalStyles = createGlobalStyle`
     padding: 10px;
     padding-top: 0;
   }
-
-  a.active svg {
-    fill: #27de1f;
-  }
 `;
 
 const theme = {
