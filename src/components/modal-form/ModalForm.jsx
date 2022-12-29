@@ -18,6 +18,15 @@ import FormDate from "../form-date/FormDate";
 const ModalForm = ({ item = {}, create, change, remove }) => {
   const [currentTodo, setCurrentTodo] = useState(() => item);
 
+  const { priority, created, expected } = currentTodo;
+
+  const changeDate = (date, property) => {
+    const res = Object.create(currentTodo);
+    res[property] = stringToDate(date);
+
+    setCurrentTodo(res);
+  };
+
   const changePriority = useCallback(
     (priority) => {
       setCurrentTodo({ ...currentTodo, priority });
@@ -43,38 +52,22 @@ const ModalForm = ({ item = {}, create, change, remove }) => {
       <StyledFieldset>
         <StyledLegend>Priority</StyledLegend>
         <StyledRadioContainer>
-          <FormPriorityRadio
-            priority={currentTodo.priority}
-            id='high'
-            changePriority={changePriority}
-          />
-          <FormPriorityRadio
-            priority={currentTodo.priority}
-            id='medium'
-            changePriority={changePriority}
-          />
-          <FormPriorityRadio
-            priority={currentTodo.priority}
-            id='low'
-            changePriority={changePriority}
-          />
+          <FormPriorityRadio priority={priority} id='high' changePriority={changePriority} />
+          <FormPriorityRadio priority={priority} id='medium' changePriority={changePriority} />
+          <FormPriorityRadio priority={priority} id='low' changePriority={changePriority} />
         </StyledRadioContainer>
       </StyledFieldset>
 
       <StyledDatesContainer>
         <FormDate
           title='Created by:'
-          value={currentTodo.created ? dateToString(currentTodo.created) : ""}
-          onChange={(e) =>
-            setCurrentTodo({ ...currentTodo, created: stringToDate(e.target.value) })
-          }
+          value={dateToString(created)}
+          onChange={(e) => changeDate(e.target.value, "created")}
         />
         <FormDate
           title='Expected by:'
-          value={currentTodo.expected ? dateToString(currentTodo.expected) : ""}
-          onChange={(e) =>
-            setCurrentTodo({ ...currentTodo, expected: stringToDate(e.target.value) })
-          }
+          value={dateToString(expected)}
+          onChange={(e) => changeDate(e.target.value, "expected")}
         />
       </StyledDatesContainer>
 

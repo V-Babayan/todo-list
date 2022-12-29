@@ -1,11 +1,11 @@
 import React from "react";
 import { StyledDateInput, StyledLabel } from "./FormDate.styled";
 
-const FormDate = ({ title, id, ...props }) => {
+const FormDate = ({ title, id, value = "", ...props }) => {
   return (
     <div>
       <StyledLabel htmlFor={id}>{title}</StyledLabel>
-      <StyledDateInput id={id} {...props} />
+      <StyledDateInput id={id} value={value} {...props} />
     </div>
   );
 };

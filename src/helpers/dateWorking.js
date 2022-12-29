@@ -1,9 +1,5 @@
 export const dateToString = (date) => {
-  const result = date.toISOString().slice(0, 10);
-
-  return result;
+  if (date) return date.toISOString().slice(0, 10);
 };
 
-export const stringToDate = (string) => {
-  return new Date(string);
-};
+export const stringToDate = (string) => new Date(string);
