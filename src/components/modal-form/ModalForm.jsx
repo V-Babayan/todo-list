@@ -1,4 +1,4 @@
-import React, { useCallback } from "react";
+import React from "react";
 
 import {
   StyledForm,
@@ -25,12 +25,9 @@ const ModalForm = ({ create, change, remove, currentTodo, setCurrentTodo, isCrea
     setCurrentTodo(res);
   };
 
-  const changePriority = useCallback(
-    (priority) => {
-      setCurrentTodo({ ...currentTodo, priority });
-    },
-    [currentTodo]
-  );
+  const changePriority = (priority) => {
+    setCurrentTodo({ ...currentTodo, priority });
+  };
 
   return (
     <StyledForm>
@@ -57,12 +54,12 @@ const ModalForm = ({ create, change, remove, currentTodo, setCurrentTodo, isCrea
       <StyledDatesContainer>
         <FormDate
           title='Created by:'
-          value={dateToString(created)}
+          value={!created ? "" : dateToString(created)}
           onChange={(e) => changeDate(e.target.value, "created")}
         />
         <FormDate
           title='Expected by:'
-          value={dateToString(expected)}
+          value={!expected ? "" : dateToString(expected)}
           onChange={(e) => changeDate(e.target.value, "expected")}
         />
       </StyledDatesContainer>

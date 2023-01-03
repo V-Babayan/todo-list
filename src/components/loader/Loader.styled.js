@@ -26,7 +26,7 @@ export const StyledLoader = styled.div`
   margin-top: 20px;
 
   border-radius: 50%;
-  border: 10px dotted ${({ theme }) => theme.primary.green};
+  border: 10px dotted #39739d;
 
   animation: ${loading} 2s linear infinite;
 `;

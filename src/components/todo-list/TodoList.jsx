@@ -1,22 +1,20 @@
 import React from "react";
 
-import { StyledTitle } from "./TodoList.styled";
 import TodoItem from "../todo-item/TodoItem";
+import Loader from "../loader/Loader";
 
-const TodoList = ({ todos, changeIsActive, change }) => {
-  if (!todos.length) {
-    return <StyledTitle>Don't have todos!</StyledTitle>;
-  }
-
-  return (
+const TodoList = ({ todos, changeCompleted, modalOpenAndClose, isLoading }) => {
+  return isLoading ? (
+    <Loader />
+  ) : (
     <ul>
       {todos.map((elem, index) => (
         <TodoItem
           key={elem.id}
-          changeIsActive={changeIsActive}
+          changeCompleted={changeCompleted}
           item={elem}
           index={index}
-          change={change}
+          modalOpenAndClose={modalOpenAndClose}
         />
       ))}
     </ul>

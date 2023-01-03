@@ -7,12 +7,12 @@ export const StyledForm = styled.form`
 `;
 
 export const StyledFieldset = styled.fieldset`
-  border: 3px solid ${({ theme }) => theme.primary.green};
+  border: 1px solid #39739d;
   border-radius: 5px;
   padding: 10px;
 `;
 export const StyledLegend = styled.legend`
-  color: ${({ theme }) => theme.primary.green};
+  color: #39739d;
 `;
 
 export const StyledRadioContainer = styled.div`
