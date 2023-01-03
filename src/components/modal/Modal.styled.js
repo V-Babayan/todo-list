@@ -1,4 +1,20 @@
-import styled from "styled-components";
+import styled, { keyframes } from "styled-components";
+const openModal = keyframes`
+  0%{
+    opacity: 0;
+  }
+  100%{
+    opacity: 1;
+  }
+`;
+const openModalContent = keyframes`
+  0%{
+    transform: scale(0);
+  }
+  100%{
+    transform: scale(1);
+  }
+`;
 
 export const StyledModal = styled.div`
   height: 100vh;
@@ -11,10 +27,19 @@ export const StyledModal = styled.div`
   align-items: center;
   justify-content: center;
 
-  pointer-events: ${({ active }) => (active ? "auto" : "none")};
+  &.entering {
+    animation: ${openModal} 0.5s linear;
+  }
 
-  transition: opacity 0.5s linear;
-  opacity: ${({ active }) => (active ? 1 : 0)};
+  &.entering > div {
+    animation: ${openModalContent} 0.5s linear;
+  }
+  &.exiting {
+    animation: ${openModal} 0.5s linear reverse;
+  }
+  &.exiting > div {
+    animation: ${openModalContent} 0.5s linear reverse;
+  }
 `;
 
 export const StyledModalContent = styled.div`
@@ -22,8 +47,6 @@ export const StyledModalContent = styled.div`
   border-radius: 12px;
   width: 50vw;
   opacity: 1;
-  transition: transform 0.5s linear;
-  transform: scale(${({ active }) => (active ? 1 : 0)});
 
   background: #ffffff;
 `;
