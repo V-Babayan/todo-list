@@ -1,8 +1,8 @@
 import styled from "styled-components";
 
-export const StyledButtonContainer = styled.div`
+export const StyledFilterForm = styled.form`
   display: flex;
-  justify-content: space-evenly;
-  margin-top: 10px;
+  gap: 20px;
+  margin: 20px 0;
   align-items: center;
 `;
