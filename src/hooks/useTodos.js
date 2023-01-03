@@ -1,12 +1,18 @@
 import { useMemo } from "react";
 import { priorityNumbers } from "../helpers/priorityNumbers";
 
+/**
+ *
+ * @param { string } sort
+ * @param {*} todos
+ * @returns
+ */
 export const useSortTodos = (sort, todos) => {
   const sortedTodos = useMemo(() => {
     switch (sort) {
       case "title":
       case "description":
-        return [...todos].sort((a, b) => a[sort].localeCompare(b[sort]));
+        return [...todos].sort((a, b) => a[sort]?.localeCompare(b[sort]));
       case "created":
       case "expected":
         return [...todos].sort((a, b) => Date.parse(a[sort]) - Date.parse(b[sort]));
