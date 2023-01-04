@@ -37,14 +37,14 @@ export const StyledTodoTitle = styled.h2`
   font-size: 2em;
   font-weight: 600;
   color: #000000;
-  ${({ isActive }) => (isActive ? "" : "text-decoration: line-through;")}
+  ${({ completed }) => (completed ? "text-decoration: line-through;" : "")}
 
   margin-bottom: 5px;
 `;
 
 export const StyledTodoSubtitle = styled.p`
   color: #2e2e2e;
-  ${({ isActive }) => (isActive ? "" : "text-decoration: line-through;")}
+  ${({ completed }) => (completed ? "text-decoration: line-through;" : "")}
 `;
 
 export const StyledDateContainer = styled.div`

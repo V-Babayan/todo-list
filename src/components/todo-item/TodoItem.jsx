@@ -21,8 +21,8 @@ const TodoItem = ({ item, index, changeCompleted, modalOpenAndClose }) => {
       <Checkbox onClick={() => changeCompleted(id)} completed={completed} />
       <StyledTodoInfo>
         <div>
-          <StyledTodoTitle isActive={completed}>{index + 1 + "." + title}</StyledTodoTitle>
-          <StyledTodoSubtitle isActive={completed}>{description}</StyledTodoSubtitle>
+          <StyledTodoTitle completed={completed}>{index + 1 + "." + title}</StyledTodoTitle>
+          <StyledTodoSubtitle completed={completed}>{description}</StyledTodoSubtitle>
         </div>
         {(created || expected) && (
           <StyledDateContainer>
