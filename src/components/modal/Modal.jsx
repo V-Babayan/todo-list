@@ -13,10 +13,8 @@ const Modal = ({ active, setActive, children }) => {
   return (
     <Transition nodeRef={nodeRef} in={active} timeout={500} mountOnEnter unmountOnExit>
       {(state) => (
-        <StyledModal ref={nodeRef} active={active} onClick={handleClick} className={`${state}`}>
-          <StyledModalContent active={active} onClick={(e) => e.stopPropagation()}>
-            {children}
-          </StyledModalContent>
+        <StyledModal ref={nodeRef} onClick={handleClick} className={`${state}`}>
+          <StyledModalContent onClick={(e) => e.stopPropagation()}>{children}</StyledModalContent>
         </StyledModal>
       )}
     </Transition>
