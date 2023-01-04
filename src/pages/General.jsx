@@ -1,5 +1,6 @@
 import React, { memo, useState, useMemo, useEffect } from "react";
 
+import axios from "axios";
 import Modal from "../components/modal/Modal";
 import TodoList from "../components/todo-list/TodoList";
 import ModalForm from "../components/modal-form/ModalForm";
@@ -17,8 +18,10 @@ function General() {
   });
   const [currentTodo, setCurrentTodo] = useState({});
   const [fetching, isLoading, error] = useFetching(async () => {
-    const data = await (await fetch("https://jsonplaceholder.typicode.com/todos")).json();
-    setTodos(data);
+    const response = await axios.get("https://jsonplaceholder.typicode.com/todos", {
+      params: { _limit: 10, page: 3 },
+    });
+    setTodos([...todos, ...response.data]);
   });
 
   const sortedAndSearchedTodos = useTodos(filter, todos);
