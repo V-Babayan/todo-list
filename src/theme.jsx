@@ -47,6 +47,10 @@ export const GlobalStyles = createGlobalStyle`
     padding: 10px;
     padding-top: 0;
   }
+
+  a.active {
+    fill: #39739d;
+  }
 `;
 
 const theme = {
