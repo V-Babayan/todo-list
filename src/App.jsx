@@ -1,11 +1,11 @@
-import React from "react";
+import React, { createContext, useState } from "react";
 import Header from "./components/header/Header";
 import AppRouter from "./components/AppRouter";
 
 const App = () => {
   return (
     <>
-      <Header />
+      <Header modalOpenAndClose={"func"} />
 
       <AppRouter />
     </>

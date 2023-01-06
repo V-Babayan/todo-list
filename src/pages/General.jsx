@@ -6,20 +6,19 @@ import TodoList from "../components/todo-list/TodoList";
 import ModalForm from "../components/modal-form/ModalForm";
 import { useTodos } from "../hooks/useTodos";
 import FilterForm from "../components/filter-form/FilterForm";
-import Header from "../components/header/Header";
 import { useFetching } from "../hooks/useFetching";
 
 function General() {
   const [todos, setTodos] = useState([]);
-  const [modalActive, setModalActive] = useState(false);
   const [filter, setFilter] = useState({
     sort: "",
     query: "",
   });
+  const [modalActive, setModalActive] = useState(false);
   const [currentTodo, setCurrentTodo] = useState({});
   const [fetching, isLoading, error] = useFetching(async () => {
     const response = await axios.get("https://jsonplaceholder.typicode.com/todos", {
-      params: { _limit: 10, page: 3 },
+      params: { _limit: 10, _page: 1 },
     });
     setTodos([...todos, ...response.data]);
   });
@@ -68,7 +67,6 @@ function General() {
 
   return (
     <div>
-      <Header modalOpenAndClose={modalOpenAndClose} />
       <FilterForm filter={filter} setFilter={setFilter} />
 
       <TodoList

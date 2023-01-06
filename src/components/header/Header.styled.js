@@ -11,6 +11,6 @@ export const StyledHeader = styled.header`
 export const StyledTitle = styled.h2`
   flex: 1 1 auto;
   font-size: 1.8em;
-  color: ${({ theme }) => theme.primary.green};
+  color: #39739d;
   text-transform: capitalize;
 `;
