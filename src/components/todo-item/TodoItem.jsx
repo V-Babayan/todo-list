@@ -1,4 +1,6 @@
 import React from "react";
+import { observer } from "mobx-react-lite";
+import ModalStore from "../../store/ModalStore";
 
 import {
   StyledTodoItem,
@@ -13,13 +15,19 @@ import Checkbox from "../core-ui/checkbox/Checkbox";
 import Button from "../core-ui/button/Button";
 import { dateToLocalString } from "../../helpers/dateWorking";
 
-const TodoItem = ({ item, index, changeCompleted, changingModal }) => {
-  const { id, title, completed, description, created, expected, priority } = item;
+import Todo from "../../store/Todo";
+
+const TodoItem = observer(({ item, index, changingModal }) => {
+  const { title, completed, description, created, expected, priority } = item;
+  const changeHandle = () => {
+    Todo.setCurrentTodo(item);
+    ModalStore.toggleModal(false);
+  };
 
   return (
     <StyledTodoItem priority={priority}>
       <Checkbox
-        onClick={() => changeCompleted(id)}
+        onClick={() => Todo.toggleCompleted(item)}
         completed={completed}
       />
       <StyledTodoInfo>
@@ -38,9 +46,9 @@ const TodoItem = ({ item, index, changeCompleted, changingModal }) => {
           </StyledDateContainer>
         )}
       </StyledTodoInfo>
-      <Button onClick={() => changingModal(item)}>Change</Button>
+      <Button onClick={changeHandle}>Change</Button>
     </StyledTodoItem>
   );
-};
+});
 
 export default TodoItem;
