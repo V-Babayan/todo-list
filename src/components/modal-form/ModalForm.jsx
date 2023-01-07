@@ -1,4 +1,5 @@
-import React, { memo, useState, useMemo } from "react";
+import React, { useState, useMemo } from "react";
+import { useLocation } from "react-router-dom";
 
 import {
   StyledForm,
@@ -19,10 +20,11 @@ import Todo from "../../store/Todo";
 import { observer } from "mobx-react-lite";
 import ModalStore from "../../store/ModalStore";
 
-const ModalForm = observer(({ create, change, remove }) => {
+const ModalForm = () => {
   const [currentTodo, setCurrentTodo] = useState(Todo.currentTodo);
-
   const { title, description, priority, created, expected } = currentTodo;
+
+  const location = useLocation();
 
   const changeDate = (date, property) => {
     const res = { ...currentTodo };
@@ -41,7 +43,7 @@ const ModalForm = observer(({ create, change, remove }) => {
   };
 
   const removeHandle = () => {
-    Todo.removeTodo();
+    Todo.removeTodo(location.pathname);
     ModalStore.toggleModal();
   };
 
@@ -111,6 +113,6 @@ const ModalForm = observer(({ create, change, remove }) => {
       </StyledButtonsContainer>
     </StyledForm>
   );
-});
+};
 
-export default memo(ModalForm);
+export default observer(ModalForm);
