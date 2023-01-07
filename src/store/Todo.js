@@ -15,16 +15,7 @@ class Todo {
       .get("https://jsonplaceholder.typicode.com/todos", {
         params: { _limit: 10, _page: 1 },
       })
-      .then((response) => (this.archive = response.data));
-  }
-
-  setArchive(items) {
-    this.archive = items;
-  }
-
-  remove(item) {
-    this.trash.push(item);
-    this.archive = this.archive.filter((elem) => elem.id !== item.id);
+      .then((response) => (this.todos = response.data));
   }
 
   toggleCompleted(item) {
@@ -36,8 +27,8 @@ class Todo {
   }
 
   createTodo(item) {
-    // this.archive.push don't change archive link and sorting alghorithm don't see changes
-    this.archive = [...this.archive, { ...item, id: Date.now(), completed: false }];
+    // this.todos.push don't change todos link and sorting alghorithm don't see changes
+    this.todos = [...this.todos, { ...item, id: Date.now(), completed: false }];
   }
 
   changingTodo(item) {
@@ -48,11 +39,39 @@ class Todo {
     console.log(this.currentTodo);
   }
 
-  removeTodo() {
+  removeTodo(path) {
+    let property;
+    path === "/todos" ? (property = "todos") : (property = "archive");
     this.trash.push(this.currentTodo);
-    this.archive = this.archive.filter((elem) => elem.id !== this.currentTodo.id);
+    this[property] = this[property].filter((elem) => elem.id !== this.currentTodo.id);
     this.currentTodo = {};
+  }
+
+  delete() {
+    this.trash = this.trash.filter((elem) => elem.id !== this.currentTodo.id);
+    // this.currentTodo = {};
   }
 }
 
 export default new Todo();
+
+// const [isLoading, setIsLoading] = useState(false);
+//   const [error, setError] = useState("");
+
+//   const fetching = useCallback(
+//     async (...args) => {
+//       setIsLoading(true);
+//       try {
+//         await callback(...args);
+//       } catch (error) {
+//         setError(error.message);
+//       } finally {
+//         setIsLoading(false);
+//       }
+//     },
+//     [callback]
+//   );
+
+//   const result = useMemo(() => [fetching, isLoading, error], [fetching, isLoading, error]);
+
+//   return result;
