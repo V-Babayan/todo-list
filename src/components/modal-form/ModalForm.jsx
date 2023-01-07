@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo, useState, useMemo } from "react";
 
 import {
   StyledForm,
@@ -11,11 +11,13 @@ import {
 
 import FormPriorityRadio from "../form-priority-radio/FormPriorityRadio";
 import FormInput from "../form-input/FormInput";
-import FormButton from "../FormButton";
 import { dateToString } from "../../helpers/dateWorking";
 import FormDate from "../form-date/FormDate";
+import Button from "../core-ui/button/Button";
 
-const ModalForm = ({ create, change, remove, currentTodo, setCurrentTodo, isCreate }) => {
+const ModalForm = ({ create, change, remove, initialTodo = {} }) => {
+  const [currentTodo, setCurrentTodo] = useState(initialTodo);
+
   const { title, description, priority, created, expected } = currentTodo;
 
   const changeDate = (date, property) => {
@@ -29,8 +31,10 @@ const ModalForm = ({ create, change, remove, currentTodo, setCurrentTodo, isCrea
     setCurrentTodo({ ...currentTodo, priority });
   };
 
+  const isCreate = useMemo(() => Object.keys(currentTodo).length === 0, []);
+
   return (
-    <StyledForm>
+    <StyledForm onSubmit={(e) => e.preventDefault()}>
       <FormInput
         title={"Title"}
         value={title}
@@ -45,9 +49,21 @@ const ModalForm = ({ create, change, remove, currentTodo, setCurrentTodo, isCrea
       <StyledFieldset>
         <StyledLegend>Priority</StyledLegend>
         <StyledRadioContainer>
-          <FormPriorityRadio priority={priority} id='high' changePriority={changePriority} />
-          <FormPriorityRadio priority={priority} id='medium' changePriority={changePriority} />
-          <FormPriorityRadio priority={priority} id='low' changePriority={changePriority} />
+          <FormPriorityRadio
+            priority={priority}
+            id='high'
+            changePriority={changePriority}
+          />
+          <FormPriorityRadio
+            priority={priority}
+            id='medium'
+            changePriority={changePriority}
+          />
+          <FormPriorityRadio
+            priority={priority}
+            id='low'
+            changePriority={changePriority}
+          />
         </StyledRadioContainer>
       </StyledFieldset>
 
@@ -66,11 +82,11 @@ const ModalForm = ({ create, change, remove, currentTodo, setCurrentTodo, isCrea
 
       <StyledButtonsContainer>
         {isCreate ? (
-          <FormButton func={create}>Create</FormButton>
+          <Button onClick={() => create(currentTodo)}>Create</Button>
         ) : (
           <>
-            <FormButton func={change}>Change</FormButton>
-            <FormButton func={remove}>Remove</FormButton>
+            <Button onClick={() => change(currentTodo)}>Change</Button>
+            <Button onClick={() => remove(currentTodo)}>Remove</Button>
           </>
         )}
       </StyledButtonsContainer>
@@ -78,4 +94,4 @@ const ModalForm = ({ create, change, remove, currentTodo, setCurrentTodo, isCrea
   );
 };
 
-export default ModalForm;
+export default memo(ModalForm);
