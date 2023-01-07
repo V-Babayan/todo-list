@@ -1,53 +1,57 @@
 import { makeAutoObservable } from "mobx";
+import axios from "axios";
 
 class Todo {
   todos = [];
-  archive = [
-    {
-      id: 1,
-      title: "Todos project is completed again over of dead line",
-      description: "Create react app 'Todos list'.",
-      created: new Date(2022, 2, 12),
-      expected: new Date(2022, 3, 12),
-      priority: "low",
-      isActive: true,
-    },
-    {
-      id: 2,
-      title: "Calculator",
-      description: "Create react app 'Calculator'.",
-      created: new Date(2022, 2, 13),
-      expected: new Date(2022, 2, 18),
-      priority: "high",
-      isActive: false,
-    },
-    {
-      id: 3,
-      title: "Physics",
-      description: "Run 5kms.",
-      created: new Date(2022, 2, 18),
-      expected: new Date(2022, 3, 1),
-      priority: "medium",
-      isActive: true,
-    },
-    {
-      id: 4,
-      title: "Practics",
-      description: "Practics react styled-components.",
-      created: new Date(2022, 2, 10),
-      expected: new Date(2022, 2, 15),
-      priority: "low",
-      isActive: false,
-    },
-  ];
+  archive = [];
+
   trash = [];
+
+  currentTodo = {};
+
   constructor() {
     makeAutoObservable(this);
+    axios
+      .get("https://jsonplaceholder.typicode.com/todos", {
+        params: { _limit: 10, _page: 1 },
+      })
+      .then((response) => (this.archive = response.data));
+  }
+
+  setArchive(items) {
+    this.archive = items;
   }
 
   remove(item) {
     this.trash.push(item);
     this.archive = this.archive.filter((elem) => elem.id !== item.id);
+  }
+
+  toggleCompleted(item) {
+    item.completed = !item.completed;
+  }
+
+  setCurrentTodo(item) {
+    this.currentTodo = item;
+  }
+
+  createTodo(item) {
+    // this.archive.push don't change archive link and sorting alghorithm don't see changes
+    this.archive = [...this.archive, { ...item, id: Date.now(), completed: false }];
+  }
+
+  changingTodo(item) {
+    for (let prop of Object.keys(item)) {
+      this.currentTodo[prop] = item[prop];
+    }
+    this.currentTodo = {};
+    console.log(this.currentTodo);
+  }
+
+  removeTodo() {
+    this.trash.push(this.currentTodo);
+    this.archive = this.archive.filter((elem) => elem.id !== this.currentTodo.id);
+    this.currentTodo = {};
   }
 }
 
