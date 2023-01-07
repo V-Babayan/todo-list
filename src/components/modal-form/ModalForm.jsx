@@ -15,8 +15,12 @@ import { dateToString } from "../../helpers/dateWorking";
 import FormDate from "../form-date/FormDate";
 import Button from "../core-ui/button/Button";
 
-const ModalForm = ({ create, change, remove, initialTodo = {} }) => {
-  const [currentTodo, setCurrentTodo] = useState(initialTodo);
+import Todo from "../../store/Todo";
+import { observer } from "mobx-react-lite";
+import ModalStore from "../../store/ModalStore";
+
+const ModalForm = observer(({ create, change, remove }) => {
+  const [currentTodo, setCurrentTodo] = useState(Todo.currentTodo);
 
   const { title, description, priority, created, expected } = currentTodo;
 
@@ -31,7 +35,22 @@ const ModalForm = ({ create, change, remove, initialTodo = {} }) => {
     setCurrentTodo({ ...currentTodo, priority });
   };
 
-  const isCreate = useMemo(() => Object.keys(currentTodo).length === 0, []);
+  const changeHandle = () => {
+    Todo.changingTodo(currentTodo);
+    ModalStore.toggleModal();
+  };
+
+  const removeHandle = () => {
+    Todo.removeTodo();
+    ModalStore.toggleModal();
+  };
+
+  const createHandle = () => {
+    Todo.createTodo(currentTodo);
+    ModalStore.toggleModal();
+  };
+
+  const isCreate = useMemo(() => Object.keys(Todo.currentTodo).length === 0, []);
 
   return (
     <StyledForm onSubmit={(e) => e.preventDefault()}>
@@ -82,16 +101,16 @@ const ModalForm = ({ create, change, remove, initialTodo = {} }) => {
 
       <StyledButtonsContainer>
         {isCreate ? (
-          <Button onClick={() => create(currentTodo)}>Create</Button>
+          <Button onClick={createHandle}>Create</Button>
         ) : (
           <>
-            <Button onClick={() => change(currentTodo)}>Change</Button>
-            <Button onClick={() => remove(currentTodo)}>Remove</Button>
+            <Button onClick={changeHandle}>Change</Button>
+            <Button onClick={removeHandle}>Remove</Button>
           </>
         )}
       </StyledButtonsContainer>
     </StyledForm>
   );
-};
+});
 
 export default memo(ModalForm);
