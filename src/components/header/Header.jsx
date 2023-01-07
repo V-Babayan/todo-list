@@ -1,12 +1,23 @@
-import React from "react";
-import { NavLink } from "react-router-dom";
+import React, { useMemo } from "react";
+import { NavLink, useLocation } from "react-router-dom";
 
 import { StyledHeader, StyledTitle } from "./Header.styled";
 
-const Header = ({ modalOpenAndClose }) => {
+const Header = () => {
+  const location = useLocation();
+  const title = useMemo(() => {
+    switch (location.pathname) {
+      case "/archive":
+        return "Archive";
+      case "/trash":
+        return "Trash";
+      default:
+        return "Todo list";
+    }
+  }, [location.pathname]);
   return (
     <StyledHeader>
-      <StyledTitle>Title</StyledTitle>
+      <StyledTitle>{title}</StyledTitle>
 
       <NavLink to={"/general"}>
         <svg
