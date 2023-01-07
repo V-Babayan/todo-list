@@ -1,11 +1,15 @@
 import React, { useState } from "react";
 import { useTodos } from "../hooks/useTodos";
-import FilterForm from "../components/filter-form/FilterForm";
 
 import Todo from "../store/Todo";
-import TodoList from "../components/todo-list/TodoList";
+import { observer } from "mobx-react-lite";
 
-const Archive = () => {
+import FilterForm from "../components/filter-form/FilterForm";
+import TodoList from "../components/todo-list/TodoList";
+import Modal from "../components/modal/Modal";
+import ModalForm from "../components/modal-form/ModalForm";
+
+const Archive = observer(() => {
   const [filter, setFilter] = useState({
     sort: "",
     query: "",
@@ -19,8 +23,11 @@ const Archive = () => {
         setFilter={setFilter}
       />
       <TodoList todos={sortedAndSearchedTodos} />
+      <Modal>
+        <ModalForm />
+      </Modal>
     </div>
   );
-};
+});
 
 export default Archive;

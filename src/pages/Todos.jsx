@@ -9,7 +9,7 @@ import FilterForm from "../components/filter-form/FilterForm";
 import { useFetching } from "../hooks/useFetching";
 import Button from "../components/core-ui/button/Button";
 
-const General = () => {
+const Todos = () => {
   const [todos, setTodos] = useState([]);
   const [filter, setFilter] = useState({
     sort: "",
@@ -73,13 +73,6 @@ const General = () => {
         setFilter={setFilter}
       />
 
-      <Button
-        onClick={(e) => {
-          setModalActive(true);
-        }}>
-        Create Todo
-      </Button>
-
       <TodoList
         isLoading={isLoading}
         todos={sortedAndSearchedTodos}
@@ -101,4 +94,4 @@ const General = () => {
   );
 };
 
-export default memo(General);
+export default memo(Todos);

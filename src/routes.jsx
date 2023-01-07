@@ -2,12 +2,12 @@ import { lazy } from "react";
 
 const routes = [
   {
-    path: "/general",
-    Component: lazy(() => import(/* webpack-chunk-name: 'pages/general' */ "./pages/General")),
-  },
-  {
     path: "/login",
     Component: lazy(() => import(/* webpack-chunk-name: 'pages/*' */ "./pages/Login")),
+  },
+  {
+    path: "/todos",
+    Component: lazy(() => import(/* webpack-chunk-name: 'pages/todos' */ "./pages/Todos")),
   },
   {
     path: "/archive",
