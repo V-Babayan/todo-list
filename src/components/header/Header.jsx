@@ -2,19 +2,11 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 
 import { StyledHeader, StyledTitle } from "./Header.styled";
-import Button from "../core-ui/button/Button";
 
 const Header = ({ modalOpenAndClose }) => {
   return (
     <StyledHeader>
       <StyledTitle>Title</StyledTitle>
-
-      <Button
-        onClick={(e) => {
-          modalOpenAndClose(true);
-        }}>
-        Create Todo
-      </Button>
 
       <NavLink to={"/general"}>
         <svg
