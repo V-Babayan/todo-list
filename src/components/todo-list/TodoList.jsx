@@ -3,7 +3,7 @@ import React from "react";
 import TodoItem from "../todo-item/TodoItem";
 import Loader from "../loader/Loader";
 
-const TodoList = ({ todos, changeCompleted, modalOpenAndClose, isLoading }) => {
+const TodoList = ({ todos, changeCompleted, isLoading, changingModal }) => {
   return isLoading ? (
     <Loader />
   ) : (
@@ -14,7 +14,7 @@ const TodoList = ({ todos, changeCompleted, modalOpenAndClose, isLoading }) => {
           changeCompleted={changeCompleted}
           item={elem}
           index={index}
-          modalOpenAndClose={modalOpenAndClose}
+          changingModal={changingModal}
         />
       ))}
     </ul>

@@ -13,12 +13,15 @@ import Checkbox from "../core-ui/checkbox/Checkbox";
 import Button from "../core-ui/button/Button";
 import { dateToLocalString } from "../../helpers/dateWorking";
 
-const TodoItem = ({ item, index, changeCompleted, modalOpenAndClose }) => {
+const TodoItem = ({ item, index, changeCompleted, changingModal }) => {
   const { id, title, completed, description, created, expected, priority } = item;
 
   return (
     <StyledTodoItem priority={priority}>
-      <Checkbox onClick={() => changeCompleted(id)} completed={completed} />
+      <Checkbox
+        onClick={() => changeCompleted(id)}
+        completed={completed}
+      />
       <StyledTodoInfo>
         <div>
           <StyledTodoTitle completed={completed}>{index + 1 + "." + title}</StyledTodoTitle>
@@ -35,7 +38,7 @@ const TodoItem = ({ item, index, changeCompleted, modalOpenAndClose }) => {
           </StyledDateContainer>
         )}
       </StyledTodoInfo>
-      <Button onClick={() => modalOpenAndClose(true, item)}>Change</Button>
+      <Button onClick={() => changingModal(item)}>Change</Button>
     </StyledTodoItem>
   );
 };
