@@ -2,11 +2,15 @@ import React, { useMemo } from "react";
 import { NavLink, useLocation } from "react-router-dom";
 
 import { StyledHeader, StyledTitle } from "./Header.styled";
+import Button from "../core-ui/button/Button";
+import ModalStore from "../../store/ModalStore";
 
 const Header = () => {
   const location = useLocation();
   const title = useMemo(() => {
     switch (location.pathname) {
+      case "/login":
+        return "Login";
       case "/archive":
         return "Archive";
       case "/trash":
@@ -15,11 +19,16 @@ const Header = () => {
         return "Todo list";
     }
   }, [location.pathname]);
+
+  const createHandle = () => {
+    ModalStore.toggleModal();
+  };
+
   return (
     <StyledHeader>
       <StyledTitle>{title}</StyledTitle>
-
-      <NavLink to={"/general"}>
+      {location.pathname === "/todos" && <Button onClick={createHandle}>Create todo</Button>}
+      <NavLink to={"/todos"}>
         <svg
           height='48'
           xmlns='http://www.w3.org/2000/svg'
