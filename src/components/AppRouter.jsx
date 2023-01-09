@@ -18,10 +18,6 @@ const AppRouter = () => {
           }
         />
       ))}
-      <Route
-        path='/*'
-        element={<Main />}
-      />
     </Routes>
   );
 };

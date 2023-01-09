@@ -35,7 +35,7 @@ class Todo {
   }
 
   createTodo(item) {
-    // this.todos.push don't change todos link and sorting alghorithm don't see changes
+    // this.todos.push don't change todos link and sorting alghorithm don't see changes because object link don't changed
     this.todos = [...this.todos, { ...item, id: Date.now(), completed: false }];
   }
 
