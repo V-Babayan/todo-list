@@ -1,4 +1,6 @@
 import React from "react";
+import { useLocation } from "react-router-dom";
+
 import { observer } from "mobx-react-lite";
 import ModalStore from "../../store/ModalStore";
 
@@ -17,11 +19,16 @@ import { dateToLocalString } from "../../helpers/dateWorking";
 
 import Todo from "../../store/Todo";
 
-const TodoItem = observer(({ item, index, changingModal }) => {
+const TodoItem = ({ item, index }) => {
+  const location = useLocation();
   const { title, completed, description, created, expected, priority } = item;
   const changeHandle = () => {
     Todo.setCurrentTodo(item);
-    ModalStore.toggleModal(false);
+    ModalStore.toggleModal();
+  };
+  const recoverHandle = () => {
+    Todo.setCurrentTodo(item);
+    Todo.recoverTodo(location.pathname);
   };
 
   return (
@@ -46,9 +53,10 @@ const TodoItem = observer(({ item, index, changingModal }) => {
           </StyledDateContainer>
         )}
       </StyledTodoInfo>
-      <Button onClick={changeHandle}>Change</Button>
+      <Button onClick={changeHandle}>{location.pathname === "/trash" ? "Delete" : "Change"}</Button>
+      {location.pathname !== "/todos" && <Button onClick={recoverHandle}>Recover</Button>}
     </StyledTodoItem>
   );
-});
+};
 
-export default TodoItem;
+export default observer(TodoItem);

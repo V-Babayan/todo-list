@@ -11,6 +11,7 @@ const Modal = observer(({ children }) => {
   const nodeRef = useRef(null);
   const handleClick = (event) => {
     event.stopPropagation();
+
     ModalStore.toggleModal();
     Todo.setCurrentTodo({});
   };

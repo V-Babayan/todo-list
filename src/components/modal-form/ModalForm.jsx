@@ -39,23 +39,24 @@ const ModalForm = () => {
 
   const changeHandle = () => {
     Todo.changingTodo(currentTodo);
-    ModalStore.toggleModal();
   };
 
   const removeHandle = () => {
     Todo.removeTodo(location.pathname);
-    ModalStore.toggleModal();
   };
 
   const createHandle = () => {
     Todo.createTodo(currentTodo);
-    ModalStore.toggleModal();
   };
 
   const isCreate = useMemo(() => Object.keys(Todo.currentTodo).length === 0, []);
 
   return (
-    <StyledForm onSubmit={(e) => e.preventDefault()}>
+    <StyledForm
+      onSubmit={(e) => {
+        e.preventDefault();
+        ModalStore.toggleModal();
+      }}>
       <FormInput
         title={"Title"}
         value={title}
@@ -106,8 +107,11 @@ const ModalForm = () => {
           <Button onClick={createHandle}>Create</Button>
         ) : (
           <>
-            <Button onClick={changeHandle}>Change</Button>
+            <Button onClick={changeHandle}>Save</Button>
             <Button onClick={removeHandle}>Remove</Button>
+            {location.pathname === "/todos" && (
+              <Button onClick={() => Todo.archivingTodo()}>Archive</Button>
+            )}
           </>
         )}
       </StyledButtonsContainer>

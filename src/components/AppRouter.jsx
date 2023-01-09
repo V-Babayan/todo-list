@@ -1,5 +1,6 @@
 import React, { Suspense } from "react";
 import { Route, Routes } from "react-router-dom";
+import Main from "../pages/Main";
 import routes from "../routes";
 import Loader from "./loader/Loader";
 
@@ -17,6 +18,10 @@ const AppRouter = () => {
           }
         />
       ))}
+      <Route
+        path='/*'
+        element={<Main />}
+      />
     </Routes>
   );
 };
