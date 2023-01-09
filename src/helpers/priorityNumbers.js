@@ -1,12 +1,9 @@
 export const priorityNumbers = (string) => {
-  switch (string) {
-    case "high":
-      return 1;
-    case "medium":
-      return 2;
-    case "low":
-      return 3;
-    default:
-      return 0;
-  }
+  const priority = {
+    high: 1,
+    medium: 2,
+    low: 3,
+  };
+  if (priority[string]) return priority[string];
+  return 0;
 };
