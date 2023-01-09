@@ -9,11 +9,12 @@ import TodoList from "../components/todo-list/TodoList";
 import Modal from "../components/modal/Modal";
 import ModalForm from "../components/modal-form/ModalForm";
 
-const Archive = observer(() => {
+const Archive = () => {
   const [filter, setFilter] = useState({
     sort: "",
     query: "",
   });
+
   const sortedAndSearchedTodos = useTodos(filter, Todo.archive);
 
   return (
@@ -28,6 +29,6 @@ const Archive = observer(() => {
       </Modal>
     </div>
   );
-});
+};
 
-export default Archive;
+export default observer(Archive);
