@@ -4,18 +4,20 @@ import axios from "axios";
 class Todo {
   todos = [];
   archive = [];
-
   trash = [];
 
   currentTodo = {};
 
   constructor() {
     makeAutoObservable(this);
+
     axios
       .get("https://jsonplaceholder.typicode.com/todos", {
         params: { _limit: 10, _page: 1 },
       })
-      .then((response) => (this.todos = response.data));
+      .then((response) => {
+        this.todos = response.data;
+      });
   }
 
   toggleCompleted(item) {
@@ -24,6 +26,12 @@ class Todo {
 
   setCurrentTodo(item) {
     this.currentTodo = item;
+  }
+
+  archivingTodo() {
+    this.archive.push(this.currentTodo);
+    this.todos = this.todos.filter((elem) => elem.id !== this.currentTodo.id);
+    this.currentTodo = {};
   }
 
   createTodo(item) {
@@ -36,42 +44,29 @@ class Todo {
       this.currentTodo[prop] = item[prop];
     }
     this.currentTodo = {};
-    console.log(this.currentTodo);
   }
 
   removeTodo(path) {
-    let property;
-    path === "/todos" ? (property = "todos") : (property = "archive");
+    let colection;
+    path === "/todos" ? (colection = "todos") : (colection = "archive");
     this.trash.push(this.currentTodo);
-    this[property] = this[property].filter((elem) => elem.id !== this.currentTodo.id);
+    this[colection] = this[colection].filter((elem) => elem.id !== this.currentTodo.id);
     this.currentTodo = {};
   }
 
   delete() {
     this.trash = this.trash.filter((elem) => elem.id !== this.currentTodo.id);
-    // this.currentTodo = {};
+    this.currentTodo = {};
+  }
+
+  recoverTodo(path) {
+    let colection;
+    path === "/trash" ? (colection = "trash") : (colection = "archive");
+    this.todos.push(this.currentTodo);
+    this[colection] = this[colection].filter((item) => item.id !== this.currentTodo.id);
+
+    this.currentTodo = {};
   }
 }
 
 export default new Todo();
-
-// const [isLoading, setIsLoading] = useState(false);
-//   const [error, setError] = useState("");
-
-//   const fetching = useCallback(
-//     async (...args) => {
-//       setIsLoading(true);
-//       try {
-//         await callback(...args);
-//       } catch (error) {
-//         setError(error.message);
-//       } finally {
-//         setIsLoading(false);
-//       }
-//     },
-//     [callback]
-//   );
-
-//   const result = useMemo(() => [fetching, isLoading, error], [fetching, isLoading, error]);
-
-//   return result;
