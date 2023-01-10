@@ -18,4 +18,14 @@ const StyledRadio = styled.input.attrs({ type: "radio" })`
   transition: background 0.3s linear;
 `;
 
-export default StyledRadio;
+const StyledPriorityRadio = styled.div`
+  display: flex;
+  align-items: center;
+  gap: 4px;
+`;
+const StyledLabel = styled.label`
+  text-transform: capitalize;
+  color: ${({ htmlFor, theme }) => theme.priorityColors[htmlFor] || theme.primary.violet};
+`;
+
+export { StyledRadio, StyledPriorityRadio, StyledLabel };

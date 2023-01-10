@@ -1,9 +1,23 @@
-import React from "react";
+import React, { memo } from "react";
 
-import StyledRadio from "./Radio.styled";
+import { StyledRadio, StyledLabel, StyledPriorityRadio } from "./Radio.styled";
 
-const Radio = (props) => {
-  return <StyledRadio {...props} />;
+let i = 0;
+
+const Radio = ({ id, checked, changePriority, ...props }) => {
+  console.log("radio: " + ++i);
+  return (
+    <StyledPriorityRadio>
+      <StyledRadio
+        name='priority'
+        id={id}
+        checked={checked}
+        onChange={() => changePriority(id)}
+        {...props}
+      />
+      <StyledLabel htmlFor={id}>{id}</StyledLabel>
+    </StyledPriorityRadio>
+  );
 };
 
-export default Radio;
+export default memo(Radio);
