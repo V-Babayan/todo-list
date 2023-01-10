@@ -1,13 +1,17 @@
-import React from "react";
+import React, { memo } from "react";
 
 import { StyledSelect } from "./StyledSelect";
 
 const Select = ({ defaultTitle, options = [], setValue, value }) => {
   return (
-    <StyledSelect value={value} onChange={(e) => setValue(e.target.value)}>
+    <StyledSelect
+      value={value}
+      onChange={(e) => setValue(e.target.value)}>
       <option disabled>{defaultTitle}</option>
       {options.map(({ value, name }) => (
-        <option key={value} value={value}>
+        <option
+          key={value}
+          value={value}>
           {name}
         </option>
       ))}
@@ -15,4 +19,4 @@ const Select = ({ defaultTitle, options = [], setValue, value }) => {
   );
 };
 
-export default Select;
+export default memo(Select);
