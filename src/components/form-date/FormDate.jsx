@@ -1,13 +1,18 @@
-import React from "react";
+import React, { memo } from "react";
 import { StyledDateInput, StyledLabel } from "./FormDate.styled";
 
-const FormDate = ({ title, id, value = "", ...props }) => {
+const FormDate = ({ title, id, value = "", onChange, property, ...props }) => {
   return (
     <div>
       <StyledLabel htmlFor={id}>{title}</StyledLabel>
-      <StyledDateInput id={id} value={value} {...props} />
+      <StyledDateInput
+        id={id}
+        value={value}
+        onChange={(e) => onChange(e.target.value, property)}
+        {...props}
+      />
     </div>
   );
 };
 
-export default FormDate;
+export default memo(FormDate);

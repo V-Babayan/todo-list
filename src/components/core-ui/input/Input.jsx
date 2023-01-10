@@ -1,7 +1,6 @@
-import React from "react";
+import React, { memo } from "react";
 
 import StyledInput from "./Input.styled";
-
 const Input = ({ value = "", ...props }) => {
   return (
     <StyledInput
@@ -11,4 +10,11 @@ const Input = ({ value = "", ...props }) => {
   );
 };
 
-export default Input;
+export default memo(
+  Input
+  //   , (prevProps, currentProps) => {
+  //   console.log("prevProps: ", prevProps);
+  //   console.log("currentProps: ", currentProps);
+  //   console.log("areEqual: ", currentProps === prevProps);
+  // }
+);

@@ -2,10 +2,7 @@ import React, { memo } from "react";
 
 import { StyledRadio, StyledLabel, StyledPriorityRadio } from "./Radio.styled";
 
-let i = 0;
-
 const Radio = ({ id, checked, changePriority, ...props }) => {
-  console.log("radio: " + ++i);
   return (
     <StyledPriorityRadio>
       <StyledRadio
