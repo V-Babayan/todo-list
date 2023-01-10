@@ -3,7 +3,7 @@ import axios from "axios";
 
 class Todo {
   todos = [];
-  archive = [];
+  archive = [{ id: 11, title: "Physics", description: "Run 5km", priority: "high" }];
   trash = [];
 
   currentTodo = {};

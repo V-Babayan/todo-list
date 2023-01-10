@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { useLocation } from "react-router-dom";
 
 import { observer } from "mobx-react-lite";
@@ -22,14 +22,14 @@ import Todo from "../../store/Todo";
 const TodoItem = ({ item, index }) => {
   const location = useLocation();
   const { title, completed, description, created, expected, priority } = item;
-  const changeHandle = () => {
+  const changeHandle = useCallback(() => {
     Todo.setCurrentTodo(item);
     ModalStore.toggleModal();
-  };
-  const recoverHandle = () => {
+  }, [item]);
+  const recoverHandle = useCallback(() => {
     Todo.setCurrentTodo(item);
     Todo.recoverTodo(location.pathname);
-  };
+  }, [item]);
 
   return (
     <StyledTodoItem priority={priority}>

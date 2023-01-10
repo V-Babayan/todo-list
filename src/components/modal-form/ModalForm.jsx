@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useCallback, useRef } from "react";
 import { useLocation } from "react-router-dom";
 
 import {
@@ -10,7 +10,6 @@ import {
   StyledDatesContainer,
 } from "./ModalForm.styled";
 
-import FormPriorityRadio from "../form-priority-radio/FormPriorityRadio";
 import FormInput from "../form-input/FormInput";
 import { dateToString } from "../../helpers/dateWorking";
 import FormDate from "../form-date/FormDate";
@@ -19,35 +18,53 @@ import Button from "../core-ui/button/Button";
 import Todo from "../../store/Todo";
 import { observer } from "mobx-react-lite";
 import ModalStore from "../../store/ModalStore";
+import Radio from "../core-ui/radio/Radio";
 
 const ModalForm = () => {
   const [currentTodo, setCurrentTodo] = useState(Todo.currentTodo);
   const { title, description, priority, created, expected } = currentTodo;
 
+  // for actual value of currentTodo in useCallbacks createTodo and changeTodo
+  const refOfTodo = useRef("");
+  refOfTodo.current = currentTodo;
+
   const location = useLocation();
 
-  const changeDate = (date, property) => {
-    const res = { ...currentTodo };
-    res[property] = new Date(date);
+  const changeDate = useCallback((date, property) => {
+    setCurrentTodo((prev) => {
+      const res = { ...prev };
+      res[property] = new Date(date);
+      return res;
+    });
+  }, []);
 
-    setCurrentTodo(res);
-  };
+  const changePriority = useCallback(
+    (priority) => setCurrentTodo((prev) => ({ ...prev, priority })),
+    []
+  );
 
-  const changePriority = (priority) => {
-    setCurrentTodo({ ...currentTodo, priority });
-  };
+  const titleOnChange = useCallback(
+    (newValue) => setCurrentTodo((prev) => ({ ...prev, title: newValue })),
+    []
+  );
+  const descriptionOnChange = useCallback(
+    (newValue) => setCurrentTodo((prev) => ({ ...prev, description: newValue })),
+    []
+  );
 
-  const changeHandle = () => {
-    Todo.changingTodo(currentTodo);
-  };
+  const createHandle = useCallback(() => {
+    Todo.createTodo(refOfTodo.current);
+  }, []);
 
-  const removeHandle = () => {
+  const changeHandle = useCallback(() => {
+    Todo.changingTodo(refOfTodo.current);
+  }, []);
+
+  const removeHandle = useCallback(() => {
     Todo.removeTodo(location.pathname);
-  };
+  }, [location.pathname]);
 
-  const createHandle = () => {
-    Todo.createTodo(currentTodo);
-  };
+  const archivingHandle = useCallback(() => Todo.archivingTodo(), []);
 
   const isCreate = useMemo(() => Object.keys(Todo.currentTodo).length === 0, []);
 
@@ -60,29 +77,29 @@ const ModalForm = () => {
       <FormInput
         title={"Title"}
         value={title}
-        setValue={(newValue) => setCurrentTodo({ ...currentTodo, title: newValue })}
+        setValue={titleOnChange}
       />
       <FormInput
         title={"Description"}
         value={description}
-        setValue={(newValue) => setCurrentTodo({ ...currentTodo, description: newValue })}
+        setValue={descriptionOnChange}
       />
 
       <StyledFieldset>
         <StyledLegend>Priority</StyledLegend>
         <StyledRadioContainer>
-          <FormPriorityRadio
-            priority={priority}
+          <Radio
+            checked={priority === "high"}
             id='high'
             changePriority={changePriority}
           />
-          <FormPriorityRadio
-            priority={priority}
+          <Radio
+            priority={priority === "medium"}
             id='medium'
             changePriority={changePriority}
           />
-          <FormPriorityRadio
-            priority={priority}
+          <Radio
+            priority={priority === "low"}
             id='low'
             changePriority={changePriority}
           />
@@ -92,13 +109,15 @@ const ModalForm = () => {
       <StyledDatesContainer>
         <FormDate
           title='Created by:'
+          property='created'
           value={!created ? "" : dateToString(created)}
-          onChange={(e) => changeDate(e.target.value, "created")}
+          onChange={changeDate}
         />
         <FormDate
           title='Expected by:'
+          property='expected'
           value={!expected ? "" : dateToString(expected)}
-          onChange={(e) => changeDate(e.target.value, "expected")}
+          onChange={changeDate}
         />
       </StyledDatesContainer>
 
@@ -109,9 +128,7 @@ const ModalForm = () => {
           <>
             <Button onClick={changeHandle}>Save</Button>
             <Button onClick={removeHandle}>Remove</Button>
-            {location.pathname === "/todos" && (
-              <Button onClick={() => Todo.archivingTodo()}>Archive</Button>
-            )}
+            {location.pathname === "/todos" && <Button onClick={archivingHandle}>Archive</Button>}
           </>
         )}
       </StyledButtonsContainer>
