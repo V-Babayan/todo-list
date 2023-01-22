@@ -2,7 +2,6 @@ import React, { useCallback } from "react";
 import { useLocation } from "react-router-dom";
 
 import { observer } from "mobx-react-lite";
-import ModalStore from "../../store/ModalStore";
 
 import {
   StyledTodoItem,
@@ -18,28 +17,38 @@ import Button from "../core-ui/button/Button";
 import { dateToLocalString } from "../../helpers/dateWorking";
 
 import Todo from "../../store/Todo";
+import { Paths } from "../../helpers/consts";
+import { useModal } from "../Context";
 
-const TodoItem = ({ item, index }) => {
+const TodoItem = ({ item }) => {
+  console.log("Item: ", item.id);
+
   const location = useLocation();
   const { title, completed, description, created, expected, priority } = item;
+  const { toggleModal } = useModal();
+
   const changeHandle = useCallback(() => {
     Todo.setCurrentTodo(item);
-    ModalStore.toggleModal();
+    toggleModal();
   }, [item]);
+
   const recoverHandle = useCallback(() => {
     Todo.setCurrentTodo(item);
     Todo.recoverTodo(location.pathname);
-  }, [item]);
+  }, [item, location.pathname]);
+
+  const checkHandle = useCallback(() => Todo.toggleCompleted(item), [item]);
 
   return (
     <StyledTodoItem priority={priority}>
       <Checkbox
-        onClick={() => Todo.toggleCompleted(item)}
+        onClick={checkHandle}
         completed={completed}
       />
+
       <StyledTodoInfo>
         <div>
-          <StyledTodoTitle completed={completed}>{index + 1 + "." + title}</StyledTodoTitle>
+          <StyledTodoTitle completed={completed}>{title}</StyledTodoTitle>
           <StyledTodoSubtitle completed={completed}>{description}</StyledTodoSubtitle>
         </div>
         {(created || expected) && (
@@ -53,8 +62,10 @@ const TodoItem = ({ item, index }) => {
           </StyledDateContainer>
         )}
       </StyledTodoInfo>
-      <Button onClick={changeHandle}>{location.pathname === "/trash" ? "Delete" : "Change"}</Button>
-      {location.pathname !== "/todos" && <Button onClick={recoverHandle}>Recover</Button>}
+      <Button onClick={changeHandle}>
+        {location.pathname === Paths.TRASH ? "Delete" : "Change"}
+      </Button>
+      {location.pathname !== Paths.TODOS && <Button onClick={recoverHandle}>Recover</Button>}
     </StyledTodoItem>
   );
 };

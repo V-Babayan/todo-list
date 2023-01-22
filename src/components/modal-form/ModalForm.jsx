@@ -17,12 +17,14 @@ import Button from "../core-ui/button/Button";
 
 import Todo from "../../store/Todo";
 import { observer } from "mobx-react-lite";
-import ModalStore from "../../store/ModalStore";
 import Radio from "../core-ui/radio/Radio";
+import { Paths } from "../../helpers/consts";
+import { useModal } from "../Context";
 
 const ModalForm = () => {
   const [currentTodo, setCurrentTodo] = useState(Todo.currentTodo);
   const { title, description, priority, created, expected } = currentTodo;
+  const { toggleModal } = useModal();
 
   // for actual value of currentTodo in useCallbacks createTodo and changeTodo
   const refOfTodo = useRef("");
@@ -72,7 +74,7 @@ const ModalForm = () => {
     <StyledForm
       onSubmit={(e) => {
         e.preventDefault();
-        ModalStore.toggleModal();
+        toggleModal();
       }}>
       <FormInput
         title={"Title"}
@@ -128,7 +130,9 @@ const ModalForm = () => {
           <>
             <Button onClick={changeHandle}>Save</Button>
             <Button onClick={removeHandle}>Remove</Button>
-            {location.pathname === "/todos" && <Button onClick={archivingHandle}>Archive</Button>}
+            {location.pathname === Paths.TODOS && (
+              <Button onClick={archivingHandle}>Archive</Button>
+            )}
           </>
         )}
       </StyledButtonsContainer>
