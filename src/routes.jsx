@@ -1,4 +1,5 @@
 import { lazy } from "react";
+import { Paths } from "./helpers/consts";
 
 const routes = [
   {
@@ -6,15 +7,15 @@ const routes = [
     Component: lazy(() => import(/* webpack-chunk-name: 'pages/' */ "./pages/Main")),
   },
   {
-    path: "/todos",
+    path: Paths.TODOS,
     Component: lazy(() => import(/* webpack-chunk-name: 'pages/todos' */ "./pages/Todos")),
   },
   {
-    path: "/archive",
+    path: Paths.ARCHIVES,
     Component: lazy(() => import(/* webpack-chunk-name: 'pages/archive' */ "./pages/Archive")),
   },
   {
-    path: "/trash",
+    path: Paths.TRASH,
     Component: lazy(() => import(/* webpack-chunk-name: 'pages/trash' */ "./pages/Trash")),
   },
 ];

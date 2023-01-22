@@ -1,28 +1,18 @@
-import React, { useCallback, useMemo, memo } from "react";
+import React, { useCallback, memo } from "react";
 
 import Input from "../core-ui/input/Input";
 import Select from "../core-ui/select/Select";
 import { StyledFilterForm } from "./FilterForm.styled";
+import { options } from "../../helpers/consts";
 
 const FilterForm = ({ filter, setFilter }) => {
   const inputHandle = useCallback(
     (e) => setFilter((prev) => ({ ...prev, query: e.target.value })),
-    []
+    [setFilter]
   );
   const selectHandle = useCallback(
     (newValue) => setFilter((prev) => ({ ...prev, sort: newValue })),
-    []
-  );
-
-  const options = useMemo(
-    () => [
-      { value: "title", name: "Title" },
-      { value: "description", name: "Description" },
-      { value: "created", name: "Created date" },
-      { value: "expected", name: "Expected date" },
-      { value: "priority", name: "Priority" },
-    ],
-    []
+    [setFilter]
   );
 
   return (
