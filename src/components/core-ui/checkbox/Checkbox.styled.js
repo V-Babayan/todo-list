@@ -11,19 +11,15 @@ const StyledCheckbox = styled.div`
   cursor: pointer;
   transition: background 0.2s linear;
 
+  & > svg {
+    position: absolute;
+    bottom: 3px;
+    left: 2px;
+  }
+
   &:hover {
     background: #c4c4c4;
   }
 `;
 
-const StyledIcon = styled.svg`
-  position: absolute;
-  bottom: 3px;
-  left: 2px;
-  width: 130%;
-  fill: #1fde78;
-  stroke-width: 5;
-  stroke: #000000;
-`;
-
-export { StyledCheckbox, StyledIcon };
+export { StyledCheckbox };
