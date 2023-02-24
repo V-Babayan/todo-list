@@ -18,7 +18,7 @@ import { dateToLocalString } from "../../helpers/dateWorking";
 
 import Todo from "../../store/Todo";
 import { Paths } from "../../helpers/consts";
-import { useModal } from "../Context";
+import { useModal } from "../../hooks/useModal";
 
 const TodoItem = ({ item }) => {
   console.log("Item: ", item.id);

@@ -19,7 +19,7 @@ import Todo from "../../store/Todo";
 import { observer } from "mobx-react-lite";
 import Radio from "../core-ui/radio/Radio";
 import { Paths } from "../../helpers/consts";
-import { useModal } from "../Context";
+import { useModal } from "../../hooks/useModal";
 
 const ModalForm = () => {
   const [currentTodo, setCurrentTodo] = useState(Todo.currentTodo);

@@ -4,7 +4,7 @@ import { StyledModal, StyledModalContent } from "./Modal.styled";
 import { Transition } from "react-transition-group";
 
 import Todo from "../../store/Todo";
-import { useModal } from "../Context";
+import { useModal } from "../../hooks/useModal";
 
 const Modal = ({ children }) => {
   const nodeRef = useRef(null);

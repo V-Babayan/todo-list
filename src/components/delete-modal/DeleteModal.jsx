@@ -4,7 +4,7 @@ import Button from "../core-ui/button/Button";
 import { StyledTitle } from "./DeleteModal.styled";
 
 import Todo from "../../store/Todo";
-import { useModal } from "../Context";
+import { useModal } from "../../hooks/useModal";
 
 const DeleteModal = () => {
   const { toggleModal } = useModal();

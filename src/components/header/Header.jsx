@@ -8,7 +8,7 @@ import { Paths, Titles } from "../../helpers/consts";
 import TodosIcon from "../../icons/Todos.icon";
 import ArchivesIcon from "../../icons/Archives.icon";
 import TrashIcon from "../../icons/Trash.icon";
-import { useModal } from "../Context";
+import { useModal } from "../../hooks/useModal";
 
 const Header = () => {
   const location = useLocation();
