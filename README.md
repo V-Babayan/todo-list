@@ -2,9 +2,9 @@
 
 ## **Todo list application using styled-components, React JS, MobX**
 
-**Start the development**
-
 ---
+
+**Start the development**
 
 - Clone a repository
 
