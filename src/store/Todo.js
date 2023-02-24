@@ -3,7 +3,7 @@ import { Paths } from "../helpers/consts";
 
 class Todo {
   todos = [];
-  archive = [{ id: 11, title: "Physics", description: "Run 5km", priority: "high" }];
+  archive = [];
   trash = [];
 
   currentTodo = {};
