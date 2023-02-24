@@ -1,9 +1,5 @@
-import React, { createContext, useContext, useState } from "react";
-
-const modalContext = createContext();
-export const useModal = () => {
-  return useContext(modalContext);
-};
+import React, { useState } from "react";
+import { modalContext } from "../hooks/useModal";
 
 const Context = ({ children }) => {
   const [modal, setModal] = useState();
